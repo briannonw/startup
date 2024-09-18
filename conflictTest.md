@@ -1,2 +1,3 @@
 Some text
-Hi
+Github change
+VS Code change / merge
