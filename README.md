@@ -11,3 +11,6 @@ Description
 * Database data - 
 * WebSocket data - 
 ### Design Images
+
+### Notes on Startup HTML
+[Startup HTML Notes](Startup_HTML_Notes.md)
