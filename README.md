@@ -18,5 +18,5 @@ Description
 * [CSS Homework Notes](CSS_Homework_Notes.md)
 #### Class
 * [Class Notes](Class_Notes.md)
-#### Startup HTML
+#### Startup
 * [Startup HTML Notes](Startup_HTML_Notes.md)
