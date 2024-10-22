@@ -20,3 +20,5 @@ Description
 * [Class Notes](Class_Notes.md)
 #### Startup
 * [Startup HTML Notes](Startup_HTML_Notes.md)
+#### Midterm
+* [Midterm Notes](Midterm_Notes.md)
