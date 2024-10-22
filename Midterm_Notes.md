@@ -1,3 +1,4 @@
+# Midterm Notes 
 1. What does the link element do?
 * The \<link> element links external resources like stylesheets to the HTML document. Typically, it’s used to link CSS files.
 2. What does a div tag do?
@@ -86,3 +87,4 @@
 * Port 22: SSH
 34. What will the following code using Promises output when executed?
 * The output depends on the resolution of the promise (fulfilled or rejected). Typically, it will return values or handle errors based on the promise's state.
+#### Return to [notes.md](notes.md)
