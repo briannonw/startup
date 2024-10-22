@@ -9,3 +9,5 @@
 * git pull
 * git commit
 * Documents/cs260/startup
+## Midterm
+* [Midterm Notes](Midterm_Notes.md)
