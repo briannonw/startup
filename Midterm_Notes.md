@@ -49,7 +49,7 @@
 23. Is it possible to add new properties to JavaScript objects?
 * Yes, you can add new properties dynamically using dot notation or bracket notation.
 24. If you want to include JavaScript on an HTML page, which tag do you use?
-* /<script>
+* \<script>
 25. Given the following HTML, what JavaScript could you use to set the text "animal" to "crow" and leave the "fish" text unaffected?
 * Use document.getElementById("animal").textContent = "crow";.
 26. Which of the following correctly describes JSON?
