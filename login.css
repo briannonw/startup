@@ -8,45 +8,31 @@ body {
 }
 
 header {
-    flex: 0 80px;
     background-color: #24305E;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 80px;
 }
 
-menu {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}  
-
-.nav-item1,
-.nav-item2 {
-    padding: 0 20px;
+.nav-left a {
+    float: left;
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 24px;
     font-size: 1.2em;
 }
 
-.nav-item1 {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.nav-item2 {
-    display: flex;
-    justify-content: flex-end;
-    /* font-size: 1.2em; */
+.nav-right {
+    float: right;
+    margin-right: 30px;
 }
 
 a {
-    /* color: #F8E9A1 !important; */
-    /* color: #EDB5Bf !important; */
     color: #67bfef !important;
     text-decoration: none !important;
+}
+
+a:hover {
+    /* color: white !important; */
+    color: #F8E9A1 !important;
+    /* color: pink !important; */
 }
 
 main {
@@ -75,10 +61,22 @@ main {
 
 .login-box {
     background-color: #374785;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+button {
+    border-radius: 10px !important;
+    padding: 2px 5px !important;
+    border: 1px solid #F8E9A1 !important;
+    background-color: #67bfef;
+    color: #24305E;
+}
+
+button:hover {
+    background-color: pink;
 }
 
 footer {
