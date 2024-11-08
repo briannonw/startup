@@ -1,5 +1,5 @@
 # Personailty Quiz Website
-Do you ever wonder about yourself? What do your choices say about your personality? Do completly random choices have an ...
+Do you ever wonder what your choices say about you? This personality quiz website helps you explore how seemingly random decisions and personality traits affect and reveal deeper aspects of your personality. Each answer you give shapes your results, offering insights into who you are. Are you ready to find out what your choices say about you?
 ### Key Features
 * Secure login over HTTPS
 * Choice between two personality quizzes
