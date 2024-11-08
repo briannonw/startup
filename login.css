@@ -2,20 +2,22 @@ body {
     display: flex;
     flex-direction: column;
     min-width: 375px;
-    background-color: #86B3D1 !important;
-    color: #EDB5Bf !important;
+    background-color: #A8D0E6 !important;
+    color: #F8E9A1 !important;
 }
 
 header {
     flex: 0 80px;
-    background-color: #4D6D9A;
+    background-color: #24305E;
     display: flex;
     align-items: center;
     height: 80px;
 }
 
 a {
-    color: #EDB5Bf !important;
+    /* color: #F8E9A1 !important; */
+    /* color: #EDB5Bf !important; */
+    color: #F76C6C !important;
     text-decoration: none !important;
 }
 
@@ -30,12 +32,12 @@ main {
 .content {
     margin: 5px 0;
     padding: 2px;
-    background-color: #4D6D9A;
+    background-color: #374785;
 }
 
 footer {
     flex: 0 40px;
-    background-color: #4D6D9A;
+    background-color: #24305E;
     display: flex;
     align-items: center;
     height: 40px;
