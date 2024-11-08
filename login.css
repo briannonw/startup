@@ -2,7 +2,8 @@ body {
     display: flex;
     flex-direction: column;
     min-width: 375px;
-    background-color: #A8D0E6 !important;
+    min-height: 500px;
+    /* background-color: #A8D0E6 !important; */
     color: #F8E9A1 !important;
 }
 
@@ -11,13 +12,40 @@ header {
     background-color: #24305E;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 80px;
+}
+
+menu {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}  
+
+.nav-item1,
+.nav-item2 {
+    padding: 0 20px;
+    font-size: 1.2em;
+}
+
+.nav-item1 {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav-item2 {
+    display: flex;
+    justify-content: flex-end;
+    /* font-size: 1.2em; */
 }
 
 a {
     /* color: #F8E9A1 !important; */
     /* color: #EDB5Bf !important; */
-    color: #F76C6C !important;
+    color: #67bfef !important;
     text-decoration: none !important;
 }
 
@@ -27,12 +55,30 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: pink !important;
 }
 
 .content {
     margin: 5px 0;
     padding: 2px;
+}
+
+.welcome1 {
+    margin-bottom: 0px;
+    padding: 5px 5px 0 5px;
+}
+
+.welcome2 {
+    margin-top: 0 5px 5px 5px;
+    padding-bottom: 5px;
+}
+
+.login-box {
     background-color: #374785;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 footer {
@@ -42,19 +88,8 @@ footer {
     align-items: center;
     height: 40px;
 
-}
-
-menu {
-    flex: 1;
-    display: flex;
-    flex-direction: row !important;
-    list-style: none;
-}   
-
-menu .nav-item {
-    padding: 0 0.3em;
-}
-    
+} 
+ 
 footer a {
     margin-left: 20px;
 }
