@@ -3,8 +3,7 @@ body {
     flex-direction: column;
     min-width: 375px;
     min-height: 500px;
-    /* background-color: #A8D0E6 !important; */
-    color: #F8E9A1 !important;
+    color: #f5e17a !important;
 }
 
 header {
@@ -19,20 +18,13 @@ header {
     font-size: 1.2em;
 }
 
-.nav-right {
-    float: right;
-    margin-right: 30px;
-}
-
 a {
     color: #67bfef !important;
     text-decoration: none !important;
 }
 
 a:hover {
-    /* color: white !important; */
     color: #F8E9A1 !important;
-    /* color: pink !important; */
 }
 
 main {
@@ -70,13 +62,13 @@ main {
 button {
     border-radius: 10px !important;
     padding: 2px 5px !important;
-    border: 1px solid #F8E9A1 !important;
-    background-color: #67bfef;
+    border: none !important;
+    background-color: #f8efc4;
     color: #24305E;
 }
 
 button:hover {
-    background-color: pink;
+    background-color: #f5e17a;
 }
 
 footer {
