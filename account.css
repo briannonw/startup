@@ -55,7 +55,6 @@ h1 {
 
 .box {
     background-color: #24305E;
-    /* background-color: #374785; */
     color: #f5e17a;
     padding: 20px;
     flex: 1 1 300px;
@@ -63,16 +62,8 @@ h1 {
     box-sizing: border-box;
 }
 
-button {
-    border-radius: 10px !important;
-    padding: 2px 5px !important;
-    border: none !important;
-    background-color: #f8efc4;
-    color: #24305E;
-}
-
-button:hover {
-    background-color: #f5e17a;
+h3 {
+    text-align: center;
 }
 
 footer {

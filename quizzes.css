@@ -3,7 +3,7 @@ body {
     flex-direction: column;
     min-width: 375px;
     min-height: 500px;
-    color: #f5e17a !important;
+    color: black !important;
 }
 
 header {
