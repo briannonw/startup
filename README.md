@@ -35,5 +35,11 @@ I properly styled the application into its final appearance.
 - [x] Application elements
 - [x] Application text content
 - [x] Application images
+##### React
+I converted my startup frontend to use React.
+- [x] Bundled using Vite
+- [x] Multiple react components (including login)
+- [x] React router
+- [x] React hooks
 #### Midterm
 * [Midterm Notes](Midterm_Notes.md)
