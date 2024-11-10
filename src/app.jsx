@@ -1,9 +1,16 @@
 import React from 'react';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
+import { Home } from './home/home';
+import { Quiz_1 } from './quiz_1/quiz_1';
+import { Quiz_2 } from './quiz_2/quiz_2';
+import { Account } from './account/account';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 export default function App() {
   return (
+    <BrowserRouter>
     <div className='body bg-dark text-light'>
       <header>
             <nav>
@@ -11,7 +18,7 @@ export default function App() {
                     <div className="nav-left">
                         <a href="home.html">Home</a>
                         <div className="nav-right">
-                            <a href="account.html">Account</a>
+                            <a href="account">Account</a>
                         </div>
                     </div>
                 </menu>
@@ -24,5 +31,6 @@ export default function App() {
             <a href="https://github.com/briannonw/startup">Briannon Woolsey's GitHub</a>
         </footer>
     </div>
+    </BrowserRouter>
   );
 }
