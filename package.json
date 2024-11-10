@@ -1,0 +1,17 @@
+{
+  "name": "startup",
+  "version": "1.0.0",
+  "description": "Do you ever wonder what your choices say about you? This personality quiz website helps you explore how seemingly random decisions and personality traits affect and reveal deeper aspects of your personality. Each answer you give shapes your results, offering insights into who you are. Are you ready to find out what your choices say about you? ### Key Features * Secure login over HTTPS * Choice between two personality quizzes * Multiple-choice quiz questions * Instant results * User account that shows past results * Mobile-friendly design * Like/dislike buttons for each quiz ### Class Technologies * HTML - Used to strcture and organize webpages. Five HTML pages for: login, account, main, quiz 1, and quiz 2. * CSS - Used to style the website so that it looks good on any device. Pages will have a similar theme. * JavaScript/React - Used for login, like/dislike button, updates and keeps track of user's selections in quizzes, calculates results, and uses React for components and routing. * Web Service - Used for login from 3rd party websites. * Authentication - Used for user to create account and login. * Database data - Used to stores users and past results from quizzes for each user. * WebSocket data - Used to update like/dislike count in realtime to all users ### Design Images",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^5.4.10"
+  }
+}
