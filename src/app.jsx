@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
-import { Login } from './login/login';
+import { Account } from './account/account';
 import { Home } from './home/home';
+import { Login } from './login/login';
 import { Quiz_1 } from './quiz_1/quiz_1';
 import { Quiz_2 } from './quiz_2/quiz_2';
-import { Account } from './account/account';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
@@ -26,8 +26,11 @@ export default function App() {
         </header>
 
         <Routes>
-            <Route path='./home' element={<Home />} />
-            <Route path='./account' element={<Account />} />
+            <Route path='/account' element={<Account />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/quiz_1' element={<Quiz_1 />} />
+            <Route path='/quiz_2' element={<Quiz_2 />} />
             <Route path='*' element={<NotFound />} />
         </Routes>
 
@@ -41,4 +44,4 @@ export default function App() {
 
 function NotFound() {
     return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
-  }
+}

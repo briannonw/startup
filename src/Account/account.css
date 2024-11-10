@@ -1,0 +1,30 @@
+h1 {
+    text-align: center;
+    color: #24305E;
+    padding-top: 20px;
+}
+
+.boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+    padding: 20px;
+}
+
+.box {
+    background-color: #24305E;
+    color: #f5e17a;
+    padding: 20px;
+    flex: 1 1 300px;
+    max-width: 34%;
+    box-sizing: border-box;
+}
+
+h3 {
+    text-align: center;
+}
+
+p {
+    text-align: left;
+}
