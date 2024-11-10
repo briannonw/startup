@@ -3,7 +3,7 @@ body {
     flex-direction: column;
     min-width: 375px;
     min-height: 500px;
-    color: black !important;
+    color: #24305E !important;
 }
 
 header {
@@ -36,9 +36,62 @@ main {
     flex: 1 calc(100vh - 110px);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     background-color: pink !important;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+    padding: 20px;
+}
+
+.option {
+    padding: 20px;
+    flex: 1 1 300px;
+    max-width: 34%;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+}
+
+.option img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+.option::before {
+    content: '';
+    display: block;
+}
+
+h3 {
+    text-align: center;
+}
+
+.main-img {
+    width: 100%;
+    max-width: 30%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.top-pic {
+    margin-top: 5px;
+    margin-bottom: 40px;
 }
 
 button {
@@ -47,10 +100,43 @@ button {
     border: none !important;
     background-color: #f8efc4;
     color: #24305E;
+    display: inline-block;
+    width: auto;
+    text-align: center;
+    margin: 10px;
+    box-sizing: border-box;
+    flex: none !important;
+}
+
+.button-submit {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.button-feedback {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+    margin-right: 25px;
 }
 
 button:hover {
     background-color: #f5e17a;
+}
+
+.result {
+    text-align: left;
+    margin-left: 25px;
+}
+
+.feedback {
+    text-align: right;
+    margin-right: 25px;
+}
+
+.like-button {
+    margin-right: 20px;
 }
 
 footer {
