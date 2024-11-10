@@ -8,9 +8,9 @@ export default function App() {
       <header>
             <nav>
                 <menu>
-                    <div class="nav-left">
+                    <div className="nav-left">
                         <a href="home.html">Home</a>
-                        <div class="nav-right">
+                        <div className="nav-right">
                             <a href="account.html">Account</a>
                         </div>
                     </div>
