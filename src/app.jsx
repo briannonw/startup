@@ -16,9 +16,9 @@ export default function App() {
             <nav>
                 <menu>
                     <div className="nav-left">
-                        <a href="home.html">Home</a>
+                        <NavLink to='home'>Home</NavLink>
                         <div className="nav-right">
-                            <a href="account">Account</a>
+                            <NavLink to='account'>Account</NavLink>
                         </div>
                     </div>
                 </menu>
