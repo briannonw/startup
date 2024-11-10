@@ -25,6 +25,15 @@ Do you ever wonder what your choices say about you? This personality quiz websit
 #### Class
 * [Class Notes](Class_Notes.md)
 #### Startup
+##### HTML
 * [Startup HTML Notes](Startup_HTML_Notes.md)
+##### CSS
+I properly styled the application into its final appearance.
+- [x] Header, footer, main content body
+- [x] Nagvigation elements
+- [x] Responsive to window resizing
+- [x] Application elements
+- [x] Application text content
+- [x] Application images
 #### Midterm
 * [Midterm Notes](Midterm_Notes.md)
