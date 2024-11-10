@@ -25,7 +25,11 @@ export default function App() {
             </nav>
         </header>
 
-        <main>App components go here</main>
+        <Routes>
+            <Route path='./home' element={<Home />} />
+            <Route path='./account' element={<Account />} />
+            <Route path='*' element={<NotFound />} />
+        </Routes>
 
         <footer>
             <a href="https://github.com/briannonw/startup">Briannon Woolsey's GitHub</a>
@@ -34,3 +38,7 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
+function NotFound() {
+    return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
+  }
