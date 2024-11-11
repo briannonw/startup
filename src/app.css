@@ -39,6 +39,32 @@ main {
     background-color: pink !important;
 }
 
+h1 {
+    text-align: center;
+    color: #24305E;
+    padding-top: 20px;
+}
+
+h3 {
+    text-align: center;
+}
+
+p {
+    text-align: left;
+}
+
+button {
+    border-radius: 10px !important;
+    padding: 2px 5px !important;
+    border: none !important;
+    background-color: #f8efc4;
+    color: #24305E;
+}
+
+button:hover {
+    background-color: #f5e17a;
+}
+
 footer {
     flex: 0 40px;
     background-color: #24305E;

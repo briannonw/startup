@@ -24,15 +24,3 @@
     flex-direction: column;
     align-items: center;
 }
-
-button {
-    border-radius: 10px !important;
-    padding: 2px 5px !important;
-    border: none !important;
-    background-color: #f8efc4;
-    color: #24305E;
-}
-
-button:hover {
-    background-color: #f5e17a;
-}
