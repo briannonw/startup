@@ -4,7 +4,7 @@ import './account.css'
 export function Account({ userName, onLogout }) {
     return (
     <main>
-        <h1>Username</h1>
+        <h1>{userName}</h1>
         <div className="boxes">
             <div className="box">
                 <h3>What Season Are You?</h3>
