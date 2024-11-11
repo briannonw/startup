@@ -45,6 +45,16 @@ export default function App() {
 
         <Routes>
           <Route
+            path="/"
+            element={
+              authState === AuthState.Authenticated ? (
+                <Home />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
             path="/home"
             element={
               authState === AuthState.Authenticated ? (
