@@ -77,3 +77,17 @@
 .like-button {
     margin-right: 20px;
 }
+
+.option.selected img {
+    /* border-color: #24305E; */
+    /* border-color: #374785; */
+    /* border-color: #007bff; */
+    border-color: #67bfef;
+    border-width: 10px;
+    border-style: solid;
+  }
+
+.option.selected {
+    font-weight: bold;
+    /* color: #374785; */
+}
