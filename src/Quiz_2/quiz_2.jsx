@@ -41,7 +41,7 @@ export function Quiz_2() {
       text: "What Describes You Best?",
       options: [
         { value: "Cool as a Cucumber", label: "Cool as a Cucumber", car: "Sports Car", img: "https://ih1.redbubble.net/image.3359016754.6688/st,small,507x507-pad,600x600,f8f8f8.jpg" },
-        { value: "Hot Mess", label: "Apples", car: "Mini Van", img: "https://images.getbento.com/accounts/90f9564d8620cfbdb3e7caadfdc5f726/media/images/Hotmess-newlogo-transparent.png?w=1000&fit=max&auto=compress,format&h=1000" },
+        { value: "Hot Mess", label: "Hot Mess", car: "Mini Van", img: "https://images.getbento.com/accounts/90f9564d8620cfbdb3e7caadfdc5f726/media/images/Hotmess-newlogo-transparent.png?w=1000&fit=max&auto=compress,format&h=1000" },
         { value: "Zen as a Yogi", label: "Zen as a Yogi", car: "SUV", img: "https://i.scdn.co/image/ab67616d00001e027d0f7793aeb21ca1701e181d" },
         { value: "Work Work Work", label: "Work Work Work", car: "Sedan", img: "https://ih1.redbubble.net/image.200328489.3476/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.u2.jpg" },
       ],
