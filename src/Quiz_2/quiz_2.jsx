@@ -1,245 +1,153 @@
-import React from 'react';
-import './quiz_2.css'
+import React, { useState } from 'react';
+import './quiz_2.css';
 
 export function Quiz_2() {
+  const [answers, setAnswers] = useState({});
+  const [result, setResult] = useState(null);
+
+  const questions = [
+    {
+      id: "q1",
+      text: "Which Flintstone Character Do You Relate to?",
+      options: [
+        { value: "Fred Flintstone", label: "Fred Flintstone", car: "Sedan", img: "https://static1.srcdn.com/wordpress/wp-content/uploads/2020/01/Fred-Flintstone.jpg" },
+        { value: "Wilma Flintstone", label: "Wilma Flintstone", car: "Mini Van", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjkVy3UFXWhBLZvQ1x8VTXoB0kMebKfcMzrA&s" },
+        { value: "Barney Rubble", label: "Barney Rubble", car: "SUV", img: "https://cdn.hanna-barberawiki.com/thumb/e/e2/Barney_Rubble.png/300px-Barney_Rubble.png" },
+        { value: "Betty Rubble", label: "Betty Rubble", car: "Sports Car", img: "https://e7.pngegg.com/pngimages/255/761/png-clipart-flintstones-character-betty-rubble-at-the-movies-cartoons.png" },
+      ],
+    },
+    {
+      id: "q2",
+      text: "Which Generation Do You Belong To?",
+      options: [
+        { value: "Baby Boomer", label: "Baby Boomer", car: "Sports Car", img: "https://c8.alamy.com/comp/EMY14P/background-text-pattern-concept-wordcloud-illustration-of-baby-boomers-EMY14P.jpg" },
+        { value: "Gen Z", label: "Gen Z", car: "Mini Van", img: "https://www.shutterstock.com/image-illustration/generation-z-word-cloud-concept-260nw-424332475.jpg" },
+        { value: "Millennial", label: "Millennial", car: "Sedan", img: "https://www.shutterstock.com/image-illustration/generation-y-word-cloud-concept-260nw-423839059.jpg" },
+        { value: "Gen X", label: "Gen X", car: "SUV", img: "https://c8.alamy.com/comp/EMY14Y/background-text-pattern-concept-wordcloud-illustration-of-generation-EMY14Y.jpg" },
+      ],
+    },
+    {
+      id: "q3",
+      text: "How Many Traffic Violations Do You Receive per Year?",
+      options: [
+        { value: "One", label: "One", car: "Sedan", img: "https://media.istockphoto.com/id/1416797815/photo/golden-number-one.jpg?s=612x612&w=0&k=20&c=A1AOP7RZK8Rkk2yxEumTlWmhQE-0nGfxVz3Ef39Dzxc=" },
+        { value: "Two", label: "Two", car: "SUV", img: "https://i.ytimg.com/vi/sz-7LTCYgIs/hqdefault.jpg" },
+        { value: "Three", label: "Three", car: "Mini Van", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrm4vq08Bcz7UDsNLDaN_46Vx55dbDhmXCUw&s" },
+        { value: "Four", label: "Four", car: "Sports Car", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Eo_circle_pink_number-4.svg/1200px-Eo_circle_pink_number-4.svg.png" },
+      ],
+    },
+    {
+      id: "q4",
+      text: "What Describes You Best?",
+      options: [
+        { value: "Cool as a Cucumber", label: "Cool as a Cucumber", car: "Sports Car", img: "https://ih1.redbubble.net/image.3359016754.6688/st,small,507x507-pad,600x600,f8f8f8.jpg" },
+        { value: "Hot Mess", label: "Apples", car: "Mini Van", img: "https://images.getbento.com/accounts/90f9564d8620cfbdb3e7caadfdc5f726/media/images/Hotmess-newlogo-transparent.png?w=1000&fit=max&auto=compress,format&h=1000" },
+        { value: "Zen as a Yogi", label: "Zen as a Yogi", car: "SUV", img: "https://i.scdn.co/image/ab67616d00001e027d0f7793aeb21ca1701e181d" },
+        { value: "Work Work Work", label: "Work Work Work", car: "Sedan", img: "https://ih1.redbubble.net/image.200328489.3476/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.u2.jpg" },
+      ],
+    },
+    {
+      id: "q5",
+      text: "What Color Would Your Vehicle Be?",
+      options: [
+        { value: "Blue", label: "Blue", car: "Sedan", img: "https://www.solidbackgrounds.com/images/7680x4320/7680x4320-medium-electric-blue-solid-color-background.jpg" },
+        { value: "White", label: "White", car: "Mini Van", img: "https://www.ledr.com/colours/white.jpg" },
+        { value: "Red", label: "Red", car: "Sports Car", img: "https://img.freepik.com/premium-photo/red-color-backgrounds_984027-210458.jpg" },
+        { value: "Silver", label: "Silver", car: "SUV", img: "https://img.freepik.com/premium-vector/abstract-solid-silver-titanium-plate-material-with-grunge-line-pattern-decorative-background_121035-214.jpg" },
+      ],
+    },
+    {
+      id: "q6",
+      text: "Which Disney Character Do You Relate To?",
+      options: [
+        { value: "Eeyore", label: "Eeyore", car: "Sedan", img: "https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/disney-winnie-the-pooh-eeyore-large-face-malaky-ghazi.jpg" },
+        { value: "Snow White", label: "Snow White", car: "Mini Van", img: "https://thebikeeatingtree.wordpress.com/wp-content/uploads/2014/11/snow-white.jpg" },
+        { value: "Cruella de Vil", label: "Cruella de Vil", car: "Sports Car", img: "https://static1.colliderimages.com/wordpress/wp-content/uploads/2021/02/cruella-de-vil-social.jpg" },
+        { value: "Gaston", label: "Gaston", car: "SUV", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiXcTYBcO4p5P97WEavAkKzta7lW6gqDr4GiSGWEHbZJRvSM6GelY-3dIo26Nv1EdAwJ3UGMqm8El2AY3dIyuHvXl35QY4ztHWisIvALaLIRBSopOSz683AGLbbPaGg_fcpmV-FB40iT_I/s1600/beauty_and_the_beast_gaston.jpg" },
+      ],
+    },
+  ];
+
+  const handleOptionClick = (questionId, optionValue) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [questionId]: optionValue,
+    }));
+  };
+
+  const handleSubmit = () => {
+    if (!allQuestionsAnswered) {
+      alert("Please answer all questions before submitting!");
+      return;
+    }
+
+    if (result) {
+      setAnswers({});
+      setResult(null);
+    } else {
+      const scores = { Winter: 0, Spring: 0, Summer: 0, Fall: 0 };
+
+      Object.entries(answers).forEach(([questionId, answerValue]) => {
+        const question = questions.find((q) => q.id === questionId);
+        const option = question.options.find((opt) => opt.value === answerValue);
+        if (option) {
+          scores[option.car] += 1;
+        }
+      });
+
+      const calculatedResult = Object.keys(scores).reduce((a, b) => (scores[a] > scores[b] ? a : b));
+      setResult(calculatedResult);
+    }
+  };
+
+  const allQuestionsAnswered = questions.every((q) => answers[q.id]);
+
   return (
     <main className="main-text">
-      <h1>Quiz 2</h1>
+      <h1>What Car Should You Drive?</h1>
       <div className="top-pic">
-          <img className="main-img" src="https://c8.alamy.com/comp/2HNPHJE/four-seasons-concept-with-spring-blossom-summer-beach-autumn-leaves-and-snow-2HNPHJE.jpg" alt="Pic for Quiz 2" />
+        <img
+          className="main-img"
+          src="https://c8.alamy.com/comp/HJWX2N/various-types-of-car-shapes-as-vector-graphic-HJWX2N.jpg"
+          alt="Quiz main image"
+        />
       </div>
 
-      <h3>Where Is Your Favorite Place to Spend Your Free Time?</h3>
-      <div className="options">
-          <div className="option">
-              <img src="https://img.aestheticwallpaperai.com/wallpapers/ac34ba69-8580-463d-97f9-08195f9a4989.webp" alt="Pic for Option 1" />
-              <p>Mountains</p>
+      {questions.map((question) => (
+        <div key={question.id} className="question">
+          <h3>{question.text}</h3>
+          <div className="options">
+            {question.options.map((option) => (
+              <div
+                key={option.value}
+                className={`option ${answers[question.id] === option.value ? "selected" : ""}`}
+                onClick={() => handleOptionClick(question.id, option.value)}
+              >
+                <img src={option.img} alt={option.label} />
+                <p>{option.label}</p>
+              </div>
+            ))}
           </div>
-          <div className="option">
-              <img src="https://w0.peakpx.com/wallpaper/397/320/HD-wallpaper-ocean-waves-at-sunset-ocean-waves-sunset-nature.jpg" alt="Pic for Option 2" />
-              <p>Ocean</p>
-          </div>
-      </div>
-      <div className="options">
-          <div className="option">
-              <img src="https://cdn.openart.ai/stable_diffusion/985e6e634e7cadf3b8c297ffddedb8f80d3659c6_2000x2000.webp" alt="Pic for Option 3" />
-              <p>City</p>
-          </div>
-          <div className="option">
-              <img src="https://i.pinimg.com/736x/71/fa/d6/71fad64710b7d7f0aadd0cf4ae38a0cf.jpg" alt="Pic for Option 4" />
-              <p>Countryside</p>
-          </div>    
-      </div>
-
-      <h3>What Is Your Favorite Fruit?</h3>
-      <div className="options">
-          <div className="option">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROPET4Zc40xn5neVO4ThlMewl2bXQaFvZLyA&s" alt="Pic for Option 1" />
-              <p>Cherries</p>
-          </div>
-          <div className="option">
-              <img src="https://images.squarespace-cdn.com/content/v1/5661b263e4b0830bdc162128/1531245497639-JRROBNGN7IAZD5E422HC/red-apples-1521577242.jpg" alt="Pic for Option 2" />
-              <p>Apples</p>
-          </div>
-      </div>
-      <div className="options">
-          <div className="option">
-              <img src="https://i.pinimg.com/736x/1c/b4/9e/1cb49e2f17d4f6471b340d66ef422c91.jpg" alt="Pic for Option 3" />
-              <p>Watermelon</p>
-          </div>
-          <div className="option">
-              <img src="https://i.pinimg.com/236x/4e/42/d8/4e42d8fb2a5b220b9f2b5c524482271a.jpg" alt="Pic for Option 4" />
-              <p>Pomegranates</p>
-          </div>    
-      </div>
-
-      <h3>What Is the Ideal Temperature?</h3>
-      <div className="options">
-          <div className="option">
-              <img src="https://blog.certifiedmtp.com/wp-content/uploads/2024/06/a36db4ff-1bff-4560-a17c-d149a6b409c8.png" alt="Pic for Option 1" />
-              <p>70-80°F</p>
-          </div>
-          <div className="option">
-              <img src="https://www.shutterstock.com/image-photo/fahrenheit-celsius-scale-white-round-260nw-1568150494.jpg" alt="Pic for Option 2" />
-              <p>40-50°F</p>
-          </div>
-      </div>
-      <div className="options">
-          <div className="option">
-              <img src="https://www.shutterstock.com/image-photo/fahrenheit-scale-thermometer-isolated-on-260nw-1845980626.jpg" alt="Pic for Option 3" />
-              <p>90-100°F</p>
-          </div>
-          <div className="option">
-              <img src="https://as1.ftcdn.net/v2/jpg/03/69/39/04/1000_F_369390402_mB9BqCKH0rvVFZIWfULpQrf7kcMcx6Ia.jpg" alt="Pic for Option 4" />
-              <p>50-60°F</p>
-          </div>    
-      </div>
-
-      <h3>What Is Your Favorite Element?</h3>
-      <div className="options">
-          <div className="option">
-              <img src="https://wallpapers.com/images/hd/water-drop-pictures-qa6cdnusxq4muojp.jpg" alt="Pic for Option 1" />
-              <p>Water</p>
-          </div>
-          <div className="option">
-              <img src="https://i.pinimg.com/736x/2f/2a/d1/2f2ad1f3b59c7e0327358ee49aed708c.jpg" alt="Pic for Option 2" />
-              <p>Earth</p>
-          </div>
-      </div>
-      <div className="options">
-          <div className="option">
-              <img src="https://i.pinimg.com/originals/42/f0/05/42f0056455932df235e1bf6ca8aaa355.jpg" alt="Pic for Option 3" />
-              <p>Fire</p>
-          </div>
-          <div className="option">
-              <img src="https://images.squarespace-cdn.com/content/v1/55ca27a6e4b0f52348481f01/1602273588016-OA2XA6CAVBT3ZVLWLVY7/air+element.jpg" alt="Pic for Option 4" />
-              <p>Air</p>
-          </div>    
-      </div>
-
-      <h3>Where Would You Like to Live?</h3>
-      <div className="options">
-          <div className="option">
-              <img src="https://img.freepik.com/premium-photo/photo-mansion-with-minimalist-aesthetic_778780-60573.jpg" alt="Pic for Option 1" />
-              <p>Mansion</p>
-          </div>
-          <div className="option">
-              <img src="https://i.pinimg.com/736x/21/b5/77/21b577c785c90f5a482af55fb315db4d.jpg" alt="Pic for Option 2" />
-              <p>Bungalow</p>
-          </div>
-      </div>
-      <div className="options">
-          <div className="option">
-              <img src="https://res.cloudinary.com/brickandbatten/image/upload/c_scale,w_464,h_693,dpr_2/f_auto,q_auto/v1645599206/wordpress_assets/62482-Black-Swan-Seapearl-opt1-A.jpg?_i=AA" alt="Pic for Option 3" />
-              <p>Apartment</p>
-          </div>
-          <div className="option">
-              <img src="https://flungmagazine.com/wp-content/uploads/2018/04/Bell-Tent-straight-shot-feature-image.jpg" alt="Pic for Option 4" />
-              <p>Tent</p>
-          </div>    
-      </div>
-
-      <h3>What Is Your Favorite Activity?</h3>
-      <div className="options">
-          <div className="option">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBZy1Dg6q7cZYBhMM1jMwEVaVAWyguGEB0GA&s" alt="Pic for Option 1" />
-              <p>Swimming</p>
-          </div>
-          <div className="option">
-              <img src="https://media.istockphoto.com/id/1416908778/photo/group-of-tennis-balls-and-rackets-against-a-net-on-an-empty-court-in-a-sports-club-during-the.jpg?s=612x612&w=0&k=20&c=ddeFyUcun4YjlU4MemKyN5q7DPr6qUSFye8GFUI5eZo=" alt="Pic for Option 2" />
-              <p>Tennis</p>
-          </div>
-      </div>
-      <div className="options">
-          <div className="option">
-              <img src="https://64.media.tumblr.com/e9c3e02db7167b6d6a537820640a3b75/tumblr_ptvjkrdFzQ1sciduvo1_1280.jpg" alt="Pic for Option 3" />
-              <p>Hiking</p>
-          </div>
-          <div className="option">
-              <img src="https://i.pinimg.com/736x/ee/49/61/ee4961fafd47d9f0b13eb26edb1cfa5a.jpg" alt="Pic for Option 4" />
-              <p>Snow Skiing</p>
-          </div>    
-      </div>
-
-      <h3>What Is Your Favorite Type of Boots?</h3>
-      <div className="options">
-          <div className="option">
-              <img src="https://png.pngtree.com/thumb_back/fw800/background/20230906/pngtree-a-pair-of-yellow-rain-boots-are-covered-in-water-image_13299335.jpg" alt="Pic for Option 1" />
-              <p>Rain Boots</p>
-          </div>
-          <div className="option">
-              <img src="https://oursportinglife.co.uk/wp-content/uploads/2024/04/dry-wet-hiking-boots.webp" alt="Pic for Option 2" />
-              <p>Hiking Boots</p>
-          </div>
-      </div>
-      <div className="options">
-          <div className="option">
-              <img src="https://i5.walmartimages.com/asr/522010ad-4da8-45c0-bb3b-8abc263b79d0.1047485c8170d70a83994a6a514128f2.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF" alt="Pic for Option 3" />
-              <p>Snow Boots</p>
-          </div>
-          <div className="option">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTelh4sAlmUrMlO0oIGBQM09_QgJF1efs_Dbg&s" alt="Pic for Option 4" />
-              <p>No Boots</p>
-          </div>    
-      </div>
-
-      <h3>What Is Your Favorite Drink?</h3>
-      <div className="options">
-          <div className="option">
-              <img src="https://t3.ftcdn.net/jpg/00/70/26/46/360_F_70264619_a6NJ9BcYvtNmuBZoscTEthAFsmhgrNcI.jpg" alt="Pic for Option 1" />
-              <p>Cider</p>
-          </div>
-          <div className="option">
-              <img src="https://i0.wp.com/thejoyfilledkitchen.com/wp-content/uploads/2021/04/Lemonade-1-2.jpg?resize=585%2C1024&ssl=1" alt="Pic for Option 2" />
-              <p>Lemonade</p>
-          </div>
-      </div>
-      <div className="options">
-          <div className="option">
-              <img src="https://www.the-tea-crane.com/wp-content/uploads/2019/11/81VGqCXNEL.jpg" alt="Pic for Option 3" />
-              <p>Tea</p>
-          </div>
-          <div className="option">
-              <img src="https://media.istockphoto.com/id/1338595351/photo/eggnog-with-spicy-cinnamon-christmas-and-winter-holidays-cozy-cocktail-with-cinnamon-and.jpg?s=612x612&w=0&k=20&c=OCnu7yMpHR5MXosURHsLfxpN3UPwEtCtnNUicxuQZi4=" alt="Pic for Option 4" />
-              <p>Eggnog</p>
-          </div>    
-      </div>
-
-      <h3>What Is Your Zodiac Sign?</h3>
-      <div className="options">
-          <div className="option">
-              <img src="https://www.shutterstock.com/image-vector/gemini-libra-aquarius-zodiac-signs-260nw-2303850907.jpg" alt="Pic for Option 1" />
-              <p>Gemini, Libra, or Aquarius</p>
-          </div>
-          <div className="option">
-              <img src="https://c8.alamy.com/comp/2R37E4N/taurus-virgo-capricorn-earth-element-zodiac-signs-set-of-astrology-cards-for-stories-horoscope-banner-vintage-art-style-linear-hand-drawing-ve-2R37E4N.jpg" alt="Pic for Option 2" />
-              <p>Taurus, Virgo, or Capricorn</p>
-          </div>
-      </div>
-      <div className="options">
-          <div className="option">
-              <img src="https://thumbs.dreamstime.com/b/zodiac-signs-aries-leo-sagittarius-fire-element-mystic-astrology-card-set-horoscope-banner-animals-black-background-282579922.jpg" alt="Pic for Option 3" />
-              <p>Aries, Leo, or Sagittarius</p>
-          </div>
-          <div className="option">
-              <img src="https://www.shutterstock.com/image-vector/zodiac-signs-cancer-scorpio-pisces-260nw-2319000229.jpg" alt="Pic for Option 4" />
-              <p>Cancer, Scorpio, or Pisces</p>
-          </div>    
-      </div>
-
-      <h3>What Is Your Favorite Color?</h3>
-      <div className="options">
-          <div className="option">
-              <img src="https://garden.spoonflower.com/c/8145303/p/f/m/orp7PuHfR3jEwezsB2OfL5gHszOQzVqudLklAx_Ns9YBF7NyxL0/Blaze%20Orange%20Solid%20Color.jpg" alt="Pic for Option 1" />
-              <p>Orange</p>
-          </div>
-          <div className="option">
-              <img src="https://wallpapers.com/images/featured/solid-red-background-oaui1n3oheyxwp9u.jpg" alt="Pic for Option 2" />
-              <p>Red</p>
-          </div>
-      </div>
-      <div className="options">
-          <div className="option">
-              <img src="https://thumbs.dreamstime.com/b/green-solid-color-background-matte-texture-wallpaper-design-surface-151675837.jpg" alt="Pic for Option 3" />
-              <p>Green</p>
-          </div>
-          <div className="option">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN3zKia8sil-WrodDChO5FDuQ8yXXfRIfyCQ&s" alt="Pic for Option 4" />
-              <p>Blue</p>
-          </div>    
-      </div>
+        </div>
+      ))}
 
       <div className="button-submit">
-          <button>Submit</button>
+        <button onClick={handleSubmit}>
+          {result ? "Try Again" : "Submit"}
+        </button>
       </div>
 
-      <h3 className="result">Result: </h3>
-      <p className="result">(result)</p>
-      <h3 className="feedback">Feedback:</h3>
-      <div className="button-feedback">
-          <button className="like-button">Like</button>
-          <button>Dislike</button>
-      </div>
-  </main>
+      {result && (
+        <div>
+          <h4 className="result">Your Luxury Ride Is A:</h4>
+          <h3 className="result">{`${result}`}</h3>
+          <h4 className="feedback">Feedback:</h4>
+          <div className="button-feedback">
+            <button className="like-button">Like</button>
+            <button>Dislike</button>
+          </div>
+        </div>
+      )}
+    </main>
   );
 }

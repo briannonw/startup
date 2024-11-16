@@ -12,7 +12,7 @@ export function Account({ userName, onLogout }) {
                 <p>result 2</p>
             </div>
             <div className="box">
-                <h3>Quiz 2</h3>
+                <h3>What Car Should You Drive?</h3>
                 <p>result 1</p>
                 <p>result 2</p>
             </div>
