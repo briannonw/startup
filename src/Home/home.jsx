@@ -17,7 +17,7 @@ export function Home() {
             </div>
             <div className="box">
                 <div className="quiz-img">
-                    <img className="home-img" src="https://c8.alamy.com/comp/2HNPHJE/four-seasons-concept-with-spring-blossom-summer-beach-autumn-leaves-and-snow-2HNPHJE.jpg" alt="Pic for Quiz 2" />
+                    <img className="home-img" src="https://c8.alamy.com/comp/HJWX2N/various-types-of-car-shapes-as-vector-graphic-HJWX2N.jpg" alt="Pic for Quiz 2" />
                 </div>
                 <Link to="/quiz_2"><h3>What Car Should You Drive?</h3></Link>
                 <p>Likes: </p>
