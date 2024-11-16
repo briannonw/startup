@@ -11,7 +11,7 @@ export function Quiz_2() {
       text: "Which Flintstone Character Do You Relate to?",
       options: [
         { value: "Fred Flintstone", label: "Fred Flintstone", car: "Sedan", img: "https://static1.srcdn.com/wordpress/wp-content/uploads/2020/01/Fred-Flintstone.jpg" },
-        { value: "Wilma Flintstone", label: "Wilma Flintstone", car: "Mini Van", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjkVy3UFXWhBLZvQ1x8VTXoB0kMebKfcMzrA&s" },
+        { value: "Wilma Flintstone", label: "Wilma Flintstone", car: "Mini Van", img: "https://cdn.hanna-barberawiki.com/thumb/9/97/Wilma_Flintstone.png/1200px-Wilma_Flintstone.png" },
         { value: "Barney Rubble", label: "Barney Rubble", car: "SUV", img: "https://cdn.hanna-barberawiki.com/thumb/e/e2/Barney_Rubble.png/300px-Barney_Rubble.png" },
         { value: "Betty Rubble", label: "Betty Rubble", car: "Sports Car", img: "https://e7.pngegg.com/pngimages/255/761/png-clipart-flintstones-character-betty-rubble-at-the-movies-cartoons.png" },
       ],
@@ -82,6 +82,8 @@ export function Quiz_2() {
     }
 
     if (result) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
       setAnswers({});
       setResult(null);
     } else {

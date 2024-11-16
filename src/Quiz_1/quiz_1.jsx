@@ -120,13 +120,15 @@ export function Quiz_1() {
       alert("Please answer all questions before submitting!");
       return;
     }
-
+  
     if (result) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  
       setAnswers({});
       setResult(null);
     } else {
       const scores = { Winter: 0, Spring: 0, Summer: 0, Fall: 0 };
-
+  
       Object.entries(answers).forEach(([questionId, answerValue]) => {
         const question = questions.find((q) => q.id === questionId);
         const option = question.options.find((opt) => opt.value === answerValue);
@@ -134,8 +136,10 @@ export function Quiz_1() {
           scores[option.season] += 1;
         }
       });
-
-      const calculatedResult = Object.keys(scores).reduce((a, b) => (scores[a] > scores[b] ? a : b));
+  
+      const calculatedResult = Object.keys(scores).reduce((a, b) =>
+        scores[a] > scores[b] ? a : b
+      );
       setResult(calculatedResult);
     }
   };
