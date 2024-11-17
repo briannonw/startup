@@ -41,5 +41,12 @@ I converted my startup frontend to use React.
 - [x] Multiple react components (including login)
 - [x] React router
 - [x] React hooks
+##### Service
+I added backend endpoints that recieves quiz results and returns them to the account page.
+- [x] Node.js/Express HTTP service
+- [x] Static middleware for frontend
+- [x] Calls to third party endpoints
+- [x] Backend service endpoints
+- [x] Frontend calls service endpoints
 #### Midterm
 * [Midterm Notes](Midterm_Notes.md)
