@@ -39,13 +39,23 @@ export function Account({ userName, onLogout }) {
         <div className="boxes">
             <div className="box">
                 <h3>What Season Are You?</h3>
-                <p>result 1</p>
-                <p>result 2</p>
+                {groupedResults['quiz_1']?.length ? (
+                    groupedResults['quiz_1'].map((r, index) => (
+                        <p key={index}>{r.result} ({new Date(r.timestamp).toLocaleString()})</p>
+                    ))
+                ) : (
+                    <p>No results yet</p>
+                )}
             </div>
             <div className="box">
                 <h3>What Car Should You Drive?</h3>
-                <p>result 1</p>
-                <p>result 2</p>
+                {groupedResults['quiz_2']?.length ? (
+                    groupedResults['quiz_2'].map((r, index) => (
+                        <p key={index}>{r.result} ({new Date(r.timestamp).toLocaleString()})</p>
+                    ))
+                ) : (
+                    <p>No results yet</p>
+                )}
             </div>
         </div>
         <div className="button-logout">
