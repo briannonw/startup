@@ -46,3 +46,29 @@ apiRouter.delete('/auth/logout', (req, res) => {
   res.status(204).end();
 });
 
+apiRouter.post('/results', (req, res) => {
+  const user = Object.values(users).find((u) => u.token === req.body.token);
+  if (!user) {
+    return res.status(401).send({ msg: 'Unauthorized' });
+  }
+
+  const { quiz, result } = req.body;
+  results.push({
+    email: user.email,
+    quiz,
+    result,
+    timestamp: new Date().toISOString(),
+  });
+
+  res.status(201).send({ msg: 'Result saved' });
+});
+
+apiRouter.get('/results', (req, res) => {
+  const user = Object.values(users).find((u) => u.token === req.headers.authorization);
+  if (!user) {
+    return res.status(401).send({ msg: 'Unauthorized' });
+  }
+
+  const userResults = results.filter((r) => r.email === user.email);
+  res.send(userResults);
+});
