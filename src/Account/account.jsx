@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import './account.css'
 
-export function Account({ userName, onLogout, userToken }) {
+export function Account({ userName, onLogout}) {
     const [quizResults, setQuizResults] = useState([]);
    
+    const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('Token is missing');
+        throw new Error('User token is undefined or missing.');
+      }
+
     useEffect(() => {
+        console.log("User token:", token);  // Log the token
+
         fetch('/api/results', {
             method: 'GET',
             headers: {
-                Authorization: userToken,
+                Authorization: `Bearer ${token}`,
             },
         })
             .then((response) => {
@@ -18,12 +26,12 @@ export function Account({ userName, onLogout, userToken }) {
                 return response.json();
             })
             .then((data) => {
-                setQuizResults(data);
+                setQuizResults(data.results);
             })
             .catch((error) => {
                 console.error('Error fetching results:', error);
             });
-    }, [userToken]);
+    }, [token]);
     
     const groupedResults = quizResults.reduce((acc, result) => {
         if (!acc[result.quiz]) {
@@ -32,6 +40,8 @@ export function Account({ userName, onLogout, userToken }) {
         acc[result.quiz].push(result);
         return acc;
     }, {});
+    
+    console.log("Grouped Results:", groupedResults);
 
     return (
     <main>

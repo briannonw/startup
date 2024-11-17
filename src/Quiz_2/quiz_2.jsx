@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './quiz_2.css';
 
-export function Quiz_2({userToken}) {
+export function Quiz_2({}) {
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
 
@@ -80,47 +80,80 @@ export function Quiz_2({userToken}) {
       alert("Please answer all questions before submitting!");
       return;
     }
-
+  
     if (result) {
+      // Reset the form if a result already exists
       window.scrollTo({ top: 0, behavior: "smooth" });
-
+  
       setAnswers({});
       setResult(null);
     } else {
+      // Calculate the quiz result
       const scores = { Sedan: 0, "Mini Van": 0, SUV: 0, "Sports Car": 0 };
-
+  
       Object.entries(answers).forEach(([questionId, answerValue]) => {
         const question = questions.find((q) => q.id === questionId);
-        const option = question.options.find((opt) => opt.value === answerValue);
+        const option = question?.options.find((opt) => opt.value === answerValue);
         if (option) {
           scores[option.car] += 1;
         }
       });
+  
+      const calculatedResult = Object.keys(scores).reduce(
+        (a, b) => (scores[a] > scores[b] ? a : b)
+      );
+      setResult(calculatedResult);
+  
+      // Retrieve token
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('Token is missing');
+        throw new Error('User token is undefined or missing.');
+      }
 
-      const calculatedResult = Object.keys(scores).reduce((a, b) => (scores[a] > scores[b] ? a : b));
-      setResult(calculatedResult); 
-
-      fetch('/api/results', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': userToken, 
-          },
-          body: JSON.stringify({
-              quiz: 'quiz_2',
-              result: calculatedResult, 
-              token: userToken,  
-          }),
-      })
-      .then(response => response.json())
-      .then(data => {
-          console.log('Result saved:', data);
-      })
-      .catch((error) => {
-          console.error('Error submitting result:', error);
+  
+      // Debugging logs
+      console.log('Answers:', answers);
+      console.log('Scores:', scores);
+      console.log('Calculated Result:', calculatedResult);
+      console.log('User Token:', token);
+  
+      console.log('Request body:', {
+        quiz: 'quiz_2',
+        result: calculatedResult,
       });
+      
+      console.log('Sending request...');
+      // Send the result to the backend
+      fetch('/api/results', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          quiz: 'quiz_2',
+          result: calculatedResult,
+        }),
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Server responded with status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Result saved:', data);
+          alert('Your result has been successfully saved!');
+        })
+        .catch(error => {
+          console.error('Error saving result:', error);
+          alert('There was an issue saving your result. Please try again.');
+        });
     }
   };
+  
+  
 
   const allQuestionsAnswered = questions.every((q) => answers[q.id]);
 
