@@ -47,12 +47,13 @@ apiRouter.delete('/auth/logout', (req, res) => {
 });
 
 apiRouter.post('/results', (req, res) => {
-  const user = Object.values(users).find((u) => u.token === req.body.token);
+  const { token, quiz, result } = req.body;
+
+  const user = Object.values(users).find((u) => u.token === token);
   if (!user) {
-    return res.status(401).send({ msg: 'Unauthorized' });
+    return res.status(401).json({ msg: 'Unauthorized' });
   }
 
-  const { quiz, result } = req.body;
   results.push({
     email: user.email,
     quiz,
@@ -60,15 +61,27 @@ apiRouter.post('/results', (req, res) => {
     timestamp: new Date().toISOString(),
   });
 
-  res.status(201).send({ msg: 'Result saved' });
+  return res.status(201).json({ msg: 'Result saved' });
 });
 
 apiRouter.get('/results', (req, res) => {
-  const user = Object.values(users).find((u) => u.token === req.headers.authorization);
+  const token = req.headers.authorization;
+  const user = Object.values(users).find((u) => u.token === token);
+
   if (!user) {
-    return res.status(401).send({ msg: 'Unauthorized' });
+    return res.status(401).json({ msg: 'Unauthorized' });
   }
 
   const userResults = results.filter((r) => r.email === user.email);
-  res.send(userResults);
+  return res.json(userResults); // Return the user's quiz results
+});
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Log the error stack to console
+  res.status(500).json({ msg: 'Internal Server Error' }); // Send a generic server error message
+});
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './quiz_2.css';
 
-export function Quiz_2() {
+export function Quiz_2({userToken}) {
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
 
@@ -87,7 +87,7 @@ export function Quiz_2() {
       setAnswers({});
       setResult(null);
     } else {
-      const scores = { Winter: 0, Spring: 0, Summer: 0, Fall: 0 };
+      const scores = { Sedan: 0, "Mini Van": 0, SUV: 0, "Sports Car": 0 };
 
       Object.entries(answers).forEach(([questionId, answerValue]) => {
         const question = questions.find((q) => q.id === questionId);
@@ -98,7 +98,27 @@ export function Quiz_2() {
       });
 
       const calculatedResult = Object.keys(scores).reduce((a, b) => (scores[a] > scores[b] ? a : b));
-      setResult(calculatedResult);
+      setResult(calculatedResult); 
+
+      fetch('/api/results', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': userToken, 
+          },
+          body: JSON.stringify({
+              quiz: 'quiz_2',
+              result: calculatedResult, 
+              token: userToken,  
+          }),
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log('Result saved:', data);
+      })
+      .catch((error) => {
+          console.error('Error submitting result:', error);
+      });
     }
   };
 

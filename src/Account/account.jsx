@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './account.css'
 
-export function Account({ userName, onLogout }) {
+export function Account({ userName, onLogout, userToken }) {
     const [quizResults, setQuizResults] = useState([]);
    
     useEffect(() => {

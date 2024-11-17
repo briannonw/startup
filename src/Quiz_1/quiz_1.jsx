@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './quiz_1.css';
 
-export function Quiz_1() {
+export function Quiz_1({userToken}) {
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
 
@@ -120,15 +120,15 @@ export function Quiz_1() {
       alert("Please answer all questions before submitting!");
       return;
     }
-  
+
     if (result) {
       window.scrollTo({ top: 0, behavior: "smooth" });
-  
+
       setAnswers({});
       setResult(null);
     } else {
       const scores = { Winter: 0, Spring: 0, Summer: 0, Fall: 0 };
-  
+
       Object.entries(answers).forEach(([questionId, answerValue]) => {
         const question = questions.find((q) => q.id === questionId);
         const option = question.options.find((opt) => opt.value === answerValue);
@@ -136,11 +136,29 @@ export function Quiz_1() {
           scores[option.season] += 1;
         }
       });
-  
-      const calculatedResult = Object.keys(scores).reduce((a, b) =>
-        scores[a] > scores[b] ? a : b
-      );
-      setResult(calculatedResult);
+
+      const calculatedResult = Object.keys(scores).reduce((a, b) => (scores[a] > scores[b] ? a : b));
+      setResult(calculatedResult); 
+
+      fetch('/api/results', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': userToken, 
+          },
+          body: JSON.stringify({
+              quiz: 'quiz_1',
+              result: calculatedResult, 
+              token: userToken,  
+          }),
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log('Result saved:', data);
+      })
+      .catch((error) => {
+          console.error('Error submitting result:', error);
+      });
     }
   };
 
