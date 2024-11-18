@@ -116,7 +116,7 @@ export function Login({ onAuthChange, authState }) {
               />
           </div>
           <div className="content">
-            <button type="button" onClick={handleLogin}>Login</button>
+            <button type="button" className="login-button" onClick={handleLogin}>Login</button>
             <button type="button" onClick={handleCreateAccount}>Create Account</button>
           </div>
           <button className="content">Login with google/facebook/etc.</button>
