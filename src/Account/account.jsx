@@ -89,7 +89,7 @@ export function Account({ userName, onLogout }) {
           )}
         </div>
         <div className="box">
-          <h3>What Car Should You Drive?</h3>
+          <h3>What Vehicle Should You Drive?</h3>
           {groupedResults['quiz_2']?.length ? (
             groupedResults['quiz_2'].map((r, index) => (
               <p key={index}>{r.result} ({new Date(r.timestamp).toLocaleString()})</p>

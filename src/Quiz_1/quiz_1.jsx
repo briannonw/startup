@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './quiz_1.css';
 
 export function Quiz_1({}) {
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
+  const [natureImage, setNatureImage] = useState('');
+
+  const apiKey = '47141317-f469a425c907050d1218882c3'; // Replace with your actual Pixabay API key
 
   const questions = [
     {
@@ -138,7 +141,7 @@ export function Quiz_1({}) {
       });
 
       const calculatedResult = Object.keys(scores).reduce((a, b) => (scores[a] > scores[b] ? a : b));
-      setResult(calculatedResult); 
+      setResult(calculatedResult);
 
       const token = localStorage.getItem('token');
       if (!token) {
@@ -150,11 +153,11 @@ export function Quiz_1({}) {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`, 
+              'Authorization': `Bearer ${token}`,
           },
           body: JSON.stringify({
               quiz: 'quiz_1',
-              result: calculatedResult, 
+              result: calculatedResult,
           }),
       })
       .then(response => {
@@ -176,14 +179,26 @@ export function Quiz_1({}) {
 
   const allQuestionsAnswered = questions.every((q) => answers[q.id]);
 
+  // Fetch a random nature image from Pixabay on component mount
+  useEffect(() => {
+    const fetchNatureImage = async () => {
+      const response = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=season&image_type=photo`);
+      const data = await response.json();
+      const randomNature = data.hits[Math.floor(Math.random() * data.hits.length)];
+      setNatureImage(randomNature?.webformatURL || '');
+    };
+
+    fetchNatureImage();
+  }, []);
+
   return (
     <main className="main-text">
       <h1>What Season Are You?</h1>
       <div className="top-pic">
         <img
           className="main-img"
-          src="https://c8.alamy.com/comp/2HNPHJE/four-seasons-concept-with-spring-blossom-summer-beach-autumn-leaves-and-snow-2HNPHJE.jpg"
-          alt="Quiz main image"
+          src={natureImage || 'https://c8.alamy.com/comp/2HNPHJE/four-seasons-concept-with-spring-blossom-summer-beach-autumn-leaves-and-snow-2HNPHJE.jpg'}
+          alt="Random nature"
         />
       </div>
 
