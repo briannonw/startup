@@ -24,7 +24,7 @@ apiRouter.post('/auth/create', async (req, res) => {
     const user = users[username];
     if (user) {
       console.log('Username already exists');
-      return res.status(409).json({ msg: 'Existing user' });
+      return res.status(409).json({ msg: 'Username already exists' });  // Status code 409 for conflict
     }
 
     // Create the new user
@@ -32,6 +32,7 @@ apiRouter.post('/auth/create', async (req, res) => {
     users[username] = newUser;
     console.log(`Created new user: ${JSON.stringify(newUser)}`);
 
+    // Return the token for the new user
     return res.status(201).json({ token: newUser.token });
   } catch (error) {
     console.error('Error during account creation:', error);
@@ -39,26 +40,50 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 });
 
-// Route for login
+const jwt = require('jsonwebtoken'); // You would need to install the 'jsonwebtoken' package
+
+const SECRET_KEY = 'your-secret-key'; // Replace with your secret key
+
 apiRouter.post('/auth/login', (req, res) => {
   try {
     console.log('Received login request');
     const { username, password } = req.body;
     console.log(`Username: ${username}, Password: ${password}`);
 
-    // Validate the user credentials
+    // Check if the user exists
     const user = users[username];
-    if (!user || user.password !== password) {
+    console.log('Current user:', user); // Log the user object to check
+
+    if (!user) {
+      console.log('User not found');
       return res.status(401).json({ msg: 'Invalid username or password' });
     }
 
-    // Return the token for the user
-    return res.status(200).json({ token: user.token });
+    // Validate the password
+    if (user.password !== password) {
+      console.log('Incorrect password');
+      return res.status(401).json({ msg: 'Invalid username or password' });
+    }
+
+    // Generate a new token (e.g., using JWT)
+    const newToken = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: '1h' });
+
+    // Update the user's token with the new one (optional)
+    user.token = newToken;
+
+    console.log('New user token:', newToken); // Log the new token
+
+    // Return the new token for the user
+    return res.status(200).json({ token: newToken });
   } catch (error) {
     console.error('Error during login:', error);
     return res.status(500).json({ msg: 'Internal Server Error' });
   }
 });
+
+
+
+
 
 //saving quiz results
 apiRouter.post('/results', (req, res) => {
@@ -125,7 +150,8 @@ apiRouter.get('/results', (req, res) => {
 
 // Route for logout
 apiRouter.delete('/auth/logout', (req, res) => {
-  const { token } = req.body;
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1]; // Extract the token
 
   try {
     const user = Object.values(users).find((u) => u.token === token);
@@ -133,10 +159,11 @@ apiRouter.delete('/auth/logout', (req, res) => {
     if (user) {
       delete user.token;
       console.log(`User logged out: ${user.username}`);
+    } else {
+      console.log(`Invalid token: ${token}`);
     }
 
     res.status(204).end();
-    
   } catch (err) {
     console.error('Error during logout:', err);
     res.status(500).json({ msg: 'Internal Server Error during logout' });

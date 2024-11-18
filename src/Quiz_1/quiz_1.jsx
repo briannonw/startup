@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './quiz_1.css';
 
-export function Quiz_1({userToken}) {
+export function Quiz_1({}) {
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
 
@@ -140,24 +140,36 @@ export function Quiz_1({userToken}) {
       const calculatedResult = Object.keys(scores).reduce((a, b) => (scores[a] > scores[b] ? a : b));
       setResult(calculatedResult); 
 
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('Token is missing');
+        throw new Error('User token is undefined or missing.');
+      }
+
       fetch('/api/results', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
-              'Authorization': userToken, 
+              'Authorization': `Bearer ${token}`, 
           },
           body: JSON.stringify({
               quiz: 'quiz_1',
               result: calculatedResult, 
-              token: userToken,  
           }),
       })
-      .then(response => response.json())
-      .then(data => {
-          console.log('Result saved:', data);
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Server responded with status: ${response.status}`);
+        }
+        return response.json();
       })
-      .catch((error) => {
-          console.error('Error submitting result:', error);
+      .then(data => {
+        console.log('Result saved:', data);
+        alert('Your result has been successfully saved!');
+      })
+      .catch(error => {
+        console.error('Error saving result:', error);
+        alert('There was an issue saving your result. Please try again.');
       });
     }
   };

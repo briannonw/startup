@@ -16,20 +16,25 @@ export function Login({ onAuthChange, authState }) {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ username: username, password: password }),  // Use username here
+          body: JSON.stringify({ username, password }),
         });
+  
+        // Check the response status
+        console.log('Response status:', response.status);
   
         if (!response.ok) {
           throw new Error('Login failed');
         }
   
         const data = await response.json();
-        const { token } = data;
-  
+        console.log('Login response data:', data);
+
+        const token = data.token;
         if (token) {
           onAuthChange(username, AuthState.Authenticated);
           localStorage.setItem('userName', username);
           localStorage.setItem('token', token);
+          console.log('Logged in successfully');
           navigate('/home');
         } else {
           alert('Invalid username or password');
@@ -42,6 +47,7 @@ export function Login({ onAuthChange, authState }) {
       alert('Please enter both username and password.');
     }
   };
+  
   
   const handleCreateAccount = async () => {
     if (username && password) {
