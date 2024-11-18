@@ -6,7 +6,7 @@ export function Home() {
   const [natureImage, setNatureImage] = useState('');
   const [carImage, setCarImage] = useState('');
 
-  const apiKey = '47141317-f469a425c907050d1218882c3'; // Replace with your actual Pixabay API key
+  const apiKey = import.meta.env.VITE_PIXABAY_API_KEY;
 
   useEffect(() => {
     // Fetch a random nature image from Pixabay

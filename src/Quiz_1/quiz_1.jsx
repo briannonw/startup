@@ -6,7 +6,7 @@ export function Quiz_1({}) {
   const [result, setResult] = useState(null);
   const [natureImage, setNatureImage] = useState('');
 
-  const apiKey = '47141317-f469a425c907050d1218882c3'; // Replace with your actual Pixabay API key
+  const apiKey = import.meta.env.VITE_PIXABAY_API_KEY;
 
   const questions = [
     {
