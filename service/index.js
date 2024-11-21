@@ -1,6 +1,7 @@
 const express = require('express');
 const uuid = require('uuid');
 const app = express();
+const path = require('path');
 
 let users = {};
 let results = [];
@@ -8,7 +9,14 @@ let results = [];
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
-app.use(express.static('public'));
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Handle SPA routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
