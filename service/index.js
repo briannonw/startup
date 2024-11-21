@@ -11,7 +11,7 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 app.use(express.json());
 
 // Serve static files
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../')));
 
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
@@ -175,13 +175,13 @@ apiRouter.delete('/auth/logout', (req, res) => {
 
 // Handle SPA routing
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../', 'index.html'));
 });
 
 // Global error handling middleware
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err.stack);  // Log the full error stack for debugging
-  res.status(500).json({ msg: 'Internal Server Error' });  // Send a generic server error message
+  res.status(500).json({ msg: 'Internal Serverr Error' });  // Send a generic server error message
 });
 
 app.listen(port, () => {
