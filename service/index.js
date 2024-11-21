@@ -1,5 +1,6 @@
 const express = require('express');
 const uuid = require('uuid');
+const path = require('path'); // Import 'path' for resolving file paths
 const app = express();
 
 let users = {};
@@ -8,7 +9,9 @@ let results = [];
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
-app.use(express.static('public'));
+// Serve static frontend files
+app.use(express.static(path.join(__dirname, '../dist')));
+
 
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
@@ -168,6 +171,11 @@ apiRouter.delete('/auth/logout', (req, res) => {
     console.error('Error during logout:', err);
     res.status(500).json({ msg: 'Internal Server Error during logout' });
   }
+});
+
+// Serve `index.html` for all other requests
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
 // Global error handling middleware
