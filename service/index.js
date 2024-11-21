@@ -11,12 +11,7 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 app.use(express.json());
 
 // Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Handle SPA routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+app.use(express.static(path.join(__dirname, '../')));
 
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
@@ -176,6 +171,11 @@ apiRouter.delete('/auth/logout', (req, res) => {
     console.error('Error during logout:', err);
     res.status(500).json({ msg: 'Internal Server Error during logout' });
   }
+});
+
+// Handle SPA routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../', 'index.html'));
 });
 
 // Global error handling middleware
