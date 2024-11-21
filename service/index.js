@@ -1,5 +1,6 @@
 const express = require('express');
 const uuid = require('uuid');
+const path = require('path');
 const app = express();
 
 let users = {};
@@ -9,8 +10,11 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
 
-app.use((_req, res) => {
-  res.sendFile('index.html', { root: 'public' });
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Catch-all route to serve the index.html file for unmatched routes (e.g., SPA routing)
+app.use((req, res) => {
+  res.sendFile('index.html', { root: path.join(__dirname, 'public') });
 });
 
 var apiRouter = express.Router();
