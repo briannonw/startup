@@ -11,7 +11,7 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 app.use(express.json());
 
 // Serve static files
-app.use(express.static(path.join(__dirname, '../')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
@@ -175,7 +175,7 @@ apiRouter.delete('/auth/logout', (req, res) => {
 
 // Handle SPA routing
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../', 'index.html'));
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // Global error handling middleware
