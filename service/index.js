@@ -1,10 +1,11 @@
 const express = require('express');
 const uuid = require('uuid');
 const path = require('path');
-const app = express();
+const bcrypt = require('bcrypt'); // Required for password validation
+const jwt = require('jsonwebtoken'); // Required for token generation
+const { getUser, getUserByToken, createUser, addResult, getResults, updateUserToken } = require('./database.js');
 
-let users = {};
-let results = [];
+const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -15,67 +16,77 @@ app.use(express.static(path.join(__dirname, 'public')));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+const SECRET_KEY = 'your-secret-key'; // Replace with your secret key
+
 // Route for account creation
 apiRouter.post('/auth/create', async (req, res) => {
   try {
     console.log('Received request for account creation');
     const { username, password } = req.body;
-    console.log(`Username: ${username}, Password: ${password}`);
 
-    // Check if the username already exists
-    const user = users[username];
-    if (user) {
+    // Check if the user already exists
+    const existingUser = await getUser(username); // Assuming getUser is a function that checks if the username exists
+    if (existingUser) {
       console.log('Username already exists');
-      return res.status(409).json({ msg: 'Username already exists' });  // Status code 409 for conflict
+      return res.status(409).json({ msg: 'Username already exists' }); // Conflict status code
     }
 
-    // Create the new user
-    const newUser = { username, password, token: uuid.v4() };
-    users[username] = newUser;
+    // Create a new user in the database
+    const newUser = await createUser(username, password); // Assuming createUser handles user creation
     console.log(`Created new user: ${JSON.stringify(newUser)}`);
 
-    // Return the token for the new user
+    // Return the token of the new user
     return res.status(201).json({ token: newUser.token });
   } catch (error) {
     console.error('Error during account creation:', error);
-    return res.status(500).json({ msg: 'Internal Server Error' });
+    return res.status(500).json({ msg: 'Internal Server Error' }); // Internal server error if something goes wrong
   }
 });
 
-const jwt = require('jsonwebtoken'); // You would need to install the 'jsonwebtoken' package
-
-const SECRET_KEY = 'your-secret-key'; // Replace with your secret key
-
-apiRouter.post('/auth/login', (req, res) => {
+// Route for login
+apiRouter.post('/auth/login', async (req, res) => {
   try {
     console.log('Received login request');
     const { username, password } = req.body;
-    console.log(`Username: ${username}, Password: ${password}`);
 
     // Check if the user exists
-    const user = users[username];
-    console.log('Current user:', user); // Log the user object to check
-
+    const user = await getUser(username);
     if (!user) {
       console.log('User not found');
       return res.status(401).json({ msg: 'Invalid username or password' });
     }
 
     // Validate the password
-    if (user.password !== password) {
+    const isValidPassword = await bcrypt.compare(password, user.password);
+    if (!isValidPassword) {
       console.log('Incorrect password');
       return res.status(401).json({ msg: 'Invalid username or password' });
     }
 
-    // Generate a new token (e.g., using JWT)
+    // Log the existing token
+    console.log('Existing token from database:', user.token);
+
+    // Check if the existing token is valid
+    const existingToken = user.token;
+    if (existingToken) {
+      try {
+        jwt.verify(existingToken, SECRET_KEY); // Verify token
+        console.log('Existing token is still valid');
+        return res.status(200).json({ token: existingToken });
+      } catch (err) {
+        console.log('Existing token is invalid or expired, generating a new one');
+      }
+    }
+
+    // Generate a new token
     const newToken = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: '1h' });
 
-    // Update the user's token with the new one (optional)
-    user.token = newToken;
+    // Manually update the user's token in the database
+    await updateUserToken(user._id, newToken); // Ensure the correct collection is used
 
-    console.log('New user token:', newToken); // Log the new token
+    // Log the new token
+    console.log('Generated new token:', newToken);
 
-    // Return the new token for the user
     return res.status(200).json({ token: newToken });
   } catch (error) {
     console.error('Error during login:', error);
@@ -83,106 +94,80 @@ apiRouter.post('/auth/login', (req, res) => {
   }
 });
 
-
-
-
-
-//saving quiz results
-apiRouter.post('/results', (req, res) => {
+// Route for saving quiz results
+apiRouter.post('/results', async (req, res) => {
   const { quiz, result } = req.body;
-  const token = req.headers.authorization?.split(' ')[1];  // Extract token
+  const token = req.headers.authorization?.split(' ')[1]; // Extract token
 
-  console.log('Received token:', token);
-  console.log('Current users:', users);  // Log the users object to check if the token is there
+  try {
+    const user = await getUserByToken(token); // Assuming this retrieves a user document
+    if (!user) {
+      return res.status(401).json({ msg: 'Unauthorized' });
+    }
 
-  const user = Object.values(users).find((u) => u.token === token);
+    const resultEntry = {
+      userId: user._id,
+      quiz,
+      result,
+      timestamp: new Date().toISOString(),
+    };
 
-  if (!user) {
-    return res.status(401).json({ msg: 'Unauthorized' });
+    await addResult(resultEntry);
+    return res.status(201).json({ msg: 'Result saved' });
+  } catch (error) {
+    console.error('Error saving result:', error);
+    return res.status(500).json({ msg: 'Internal Server Error' });
   }
-
-  results.push({
-    username: user.username,
-    quiz,
-    result,
-    timestamp: new Date().toISOString(),
-  });
-
-  return res.status(201).json({ msg: 'Result saved' });
 });
 
-
 // Route for retrieving quiz results
-apiRouter.get('/results', (req, res) => {
+apiRouter.get('/results', async (req, res) => {
+  const token = req.headers.authorization?.split(' ')[1]; // Get token from Authorization header
+
   try {
-    const token = req.headers.authorization?.split(' ')[1];  // Get token from Authorization header (Bearer <token>)
-
-    // If token is missing, return an error
-    if (!token) {
-      console.error("No token provided");
-      return res.status(401).json({ msg: 'Unauthorized, no token provided' });
-    }
-
-    console.log('Current users:', users);
-    const user = Object.values(users).find((u) => u.token === token);
-    
-    // If no matching user is found, return an error
+    const user = await getUserByToken(token);
     if (!user) {
-      console.error(`Invalid token: ${token}`);
-      return res.status(401).json({ msg: 'Unauthorized, invalid token' });
+      return res.status(401).json({ msg: 'Unauthorized' });
     }
 
-    // Filter results for the authenticated user
-    const userResults = results.filter(result => result.username === user.username);
+    // Retrieve results for the user
+    const results = await getResults();
 
-    // If no results are found for the user, you can log that as well
-    if (userResults.length === 0) {
-      console.log(`No results found for user: ${user.username}`);
-    }
-
-    // Return the user's quiz results
-    return res.status(200).json({ results: userResults });
-
+    return res.status(200).json({ results });
   } catch (error) {
-    // Catch and log any unexpected errors
     console.error('Error retrieving results:', error);
     return res.status(500).json({ msg: 'Internal Server Error' });
   }
 });
 
 // Route for logout
-apiRouter.delete('/auth/logout', (req, res) => {
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1]; // Extract the token
+apiRouter.delete('/auth/logout', async (req, res) => {
+  const token = req.headers.authorization?.split(' ')[1]; // Extract the token
 
   try {
-    const user = Object.values(users).find((u) => u.token === token);
+    const user = await getUserByToken(token);
 
-    if (user) {
-      delete user.token;
-      console.log(`User logged out: ${user.username}`);
-    } else {
+    if (!user) {
       console.log(`Invalid token: ${token}`);
+      return res.status(401).json({ msg: 'Invalid token' });
     }
 
+    console.log(`Logging out user: ${user.username}`);
+
+    // Invalidate the user's token
+    user.token = null;
+
+    // Manually update the user's token in the database
+    await updateUserToken(user._id, null); // Set token to null
+
     res.status(204).end();
-  } catch (err) {
-    console.error('Error during logout:', err);
+  } catch (error) {
+    console.error('Error during logout:', error);
     res.status(500).json({ msg: 'Internal Server Error during logout' });
   }
 });
 
-// Catch-all route to serve the index.html file for unmatched routes (e.g., SPA routing)
-app.use((req, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, 'public') });
-});
-
-// Global error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Unhandled error:', err.stack);  // Log the full error stack for debugging
-  res.status(500).json({ msg: 'Internal Server Error' });  // Send a generic server error message
-});
-
+// Run the server
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
