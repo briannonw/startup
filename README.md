@@ -26,7 +26,13 @@ Do you ever wonder what your choices say about you? This personality quiz websit
 * [Class Notes](Class_Notes.md)
 #### Startup
 ##### HTML
-* [Startup HTML Notes](Startup_HTML_Notes.md)
+I built the basic structure of my application using HTML.
+- [x] HTML pages - Five HTML pages representing login, home, account, quiz 1, and quiz 2.
+- [x] Links - Header with links to the home and account pages. Home page with links to quiz 1 and quiz 2.
+- [x] Text - Placeholder text on all pages.
+- [x] Images - Placeholder img tags.
+- [x] DB/Login - Input box and submit button for login. Quiz results will be saved in the database and displayed on the account page.
+- [x] WebSocket - Like and dislike buttons for realtime data.
 ##### CSS
 I properly styled the application into its final appearance.
 - [x] Header, footer, main content body
@@ -48,5 +54,12 @@ I added backend endpoints that recieves quiz results and returns them to the acc
 - [x] Calls to third party endpoints
 - [x] Backend service endpoints
 - [x] Frontend calls service endpoints
+##### Database/Login
+I associated quiz results with the logged in user. Quiz results and user credentials are stored in and retrieved from the database.
+- [x]  MongoDB Atlas database created
+- [x]  New user registration
+- [x]  Existing user authentication and logout
+- [x]  Use MongoDB to store user credentials and results
+- [x]  Restricts functionality based on authentication
 #### Midterm
 * [Midterm Notes](Midterm_Notes.md)
