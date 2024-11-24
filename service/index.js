@@ -13,6 +13,11 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Catch-all route to serve the index.html file for unmatched routes (e.g., SPA routing)
+app.use((req, res) => {
+  res.sendFile('index.html', { root: path.join(__dirname, 'public') });
+});
+
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
@@ -165,6 +170,17 @@ apiRouter.delete('/auth/logout', async (req, res) => {
     console.error('Error during logout:', error);
     res.status(500).json({ msg: 'Internal Server Error during logout' });
   }
+});
+
+// Catch-all route to serve the index.html file for unmatched routes (e.g., SPA routing)
+app.use((req, res) => {
+  res.sendFile('index.html', { root: path.join(__dirname, 'public') });
+});
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err.stack);  // Log the full error stack for debugging
+  res.status(500).json({ msg: 'Internal Server Error' });  // Send a generic server error message
 });
 
 // Run the server
