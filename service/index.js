@@ -13,11 +13,6 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Catch-all route to serve the index.html file for unmatched routes (e.g., SPA routing)
-app.use((req, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, 'public') });
-});
-
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
