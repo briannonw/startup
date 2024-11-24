@@ -130,8 +130,8 @@ apiRouter.get('/results', async (req, res) => {
       return res.status(401).json({ msg: 'Unauthorized' });
     }
 
-    // Retrieve results for the user
-    const results = await getResults();
+    // Retrieve results for the authenticated user by their userId
+    const results = await getResults(user._id);  // Call the updated getResults function
 
     return res.status(200).json({ results });
   } catch (error) {

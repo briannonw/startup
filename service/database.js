@@ -44,8 +44,8 @@ async function addResult(result) {
   return resultCollection.insertOne(result);
 }
 
-function getResults() {
-  return resultCollection.find().toArray();
+async function getResults(userId) {
+  return resultCollection.find({ userId: userId }).toArray();
 }
 
 // Custom function to update the user's token in the database
