@@ -22,7 +22,6 @@ Do you ever wonder what your choices say about you? This personality quiz websit
 #### Homework
 * [HTML Homework Notes](HTML_Homework_Notes.md)
 * [CSS Homework Notes](CSS_Homework_Notes.md)
-* [JavaScript Homework Notes](JavaScript_Homework_Notes.md)
 * [React Homework Notes](React_Homework_Notes.md)
 * [Service Homework Notes](Service_Homework_Notes.md)
 * [Database/Login Homework Notes](Database/Login_Homework_Notes.md)
