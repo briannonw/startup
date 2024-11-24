@@ -63,7 +63,7 @@ I associated quiz results with the logged in user. Quiz results and user credent
 - [x]  MongoDB Atlas database created
 - [x]  New user registration
 - [x]  Existing user authentication and logout
-- [x]  Use MongoDB to store user credentials and results
+- [x]  Use MongoDB to store user credentials and application data
 - [x]  Restricts functionality based on authentication
 #### Midterm
 * [Midterm Notes](Midterm_Notes.md)
