@@ -17,7 +17,46 @@ Do you ever wonder what your choices say about you? This personality quiz websit
 * Database data - Used to stores users and past results from quizzes for each user.
 * WebSocket data - Used to update like/dislike count in realtime to all users
 ### Design Images
+<img src="https://github.com/user-attachments/assets/d5763c23-7790-43b2-b6e8-fc7d2171b421" alt="Login, Home, and Account Pages" height="400">
+<img src="https://github.com/user-attachments/assets/b198a7e0-0f33-4ab8-979a-8d260bd771b2" alt="Quiz 1 and Quiz 2 Pages" height="400">
 
+## Startup
+#### HTML
+I built the basic structure of my application using HTML.
+- [x] HTML pages - Five HTML pages representing login, home, account, quiz 1, and quiz 2.
+- [x] Links - Header with links to the home and account pages. Home page with links to quiz 1 and quiz 2.
+- [x] Text - Placeholder text on all pages.
+- [x] Images - Placeholder img tags.
+- [x] DB/Login - Input box and submit button for login. Quiz results will be saved in the database and displayed on the account page.
+- [x] WebSocket - Like and dislike buttons for realtime data.
+#### CSS
+I properly styled the application into its final appearance.
+- [x] Header, footer, main content body
+- [x] Nagvigation elements
+- [x] Responsive to window resizing
+- [x] Application elements
+- [x] Application text content
+- [x] Application images
+#### React
+I converted my startup frontend to use React.
+- [x] Bundled using Vite
+- [x] Multiple react components (including login)
+- [x] React router
+- [x] React hooks
+#### Service
+I added backend endpoints that recieves quiz results and returns them to the account page.
+- [x] Node.js/Express HTTP service
+- [x] Static middleware for frontend
+- [x] Calls to third party endpoints
+- [x] Backend service endpoints
+- [x] Frontend calls service endpoints
+#### Database/Login
+I associated quiz results with the logged in user. Quiz results and user credentials are stored in and retrieved from the database.
+- [x]  MongoDB Atlas database created
+- [x]  New user registration
+- [x]  Existing user authentication and logout
+- [x]  Use MongoDB to store user credentials and application data
+- [x]  Restricts functionality based on authentication
 ## Notes
 #### Homework
 * [HTML Homework Notes](HTML_Homework_Notes.md)
@@ -28,42 +67,5 @@ Do you ever wonder what your choices say about you? This personality quiz websit
 * [WebSocket Homework Notes](WebSocket_Homework_Notes.md)
 #### Class
 * [Class Notes](Class_Notes.md)
-#### Startup
-##### HTML
-I built the basic structure of my application using HTML.
-- [x] HTML pages - Five HTML pages representing login, home, account, quiz 1, and quiz 2.
-- [x] Links - Header with links to the home and account pages. Home page with links to quiz 1 and quiz 2.
-- [x] Text - Placeholder text on all pages.
-- [x] Images - Placeholder img tags.
-- [x] DB/Login - Input box and submit button for login. Quiz results will be saved in the database and displayed on the account page.
-- [x] WebSocket - Like and dislike buttons for realtime data.
-##### CSS
-I properly styled the application into its final appearance.
-- [x] Header, footer, main content body
-- [x] Nagvigation elements
-- [x] Responsive to window resizing
-- [x] Application elements
-- [x] Application text content
-- [x] Application images
-##### React
-I converted my startup frontend to use React.
-- [x] Bundled using Vite
-- [x] Multiple react components (including login)
-- [x] React router
-- [x] React hooks
-##### Service
-I added backend endpoints that recieves quiz results and returns them to the account page.
-- [x] Node.js/Express HTTP service
-- [x] Static middleware for frontend
-- [x] Calls to third party endpoints
-- [x] Backend service endpoints
-- [x] Frontend calls service endpoints
-##### Database/Login
-I associated quiz results with the logged in user. Quiz results and user credentials are stored in and retrieved from the database.
-- [x]  MongoDB Atlas database created
-- [x]  New user registration
-- [x]  Existing user authentication and logout
-- [x]  Use MongoDB to store user credentials and application data
-- [x]  Restricts functionality based on authentication
 #### Midterm
 * [Midterm Notes](Midterm_Notes.md)
