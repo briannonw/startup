@@ -3,7 +3,7 @@ const uuid = require('uuid');
 const path = require('path');
 const bcrypt = require('bcrypt'); // Required for password validation
 const jwt = require('jsonwebtoken'); // Required for token generation
-const { getUser, getUserByToken, createUser, addResult, getResults, updateUserToken } = require('./database.js');
+const { getUser, getUserByToken, createUser, addResult, getResults, updateUserToken, getLikeResults, updateLikeResults } = require('./database.js');
 const { quizLikes } = require('./webSocket.js')
 
 const app = express();
@@ -170,7 +170,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
 
 // Catch-all route to serve the index.html file for unmatched routes (e.g., SPA routing)
 app.use((req, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, 'public') });
+  res.sendFile('index.html', { root: path.join(__dirname, '..') });
 });
 
 // Global error handling middleware
@@ -180,7 +180,7 @@ app.use((err, req, res, next) => {
 });
 
 // Run the server
-app.listen(port, () => {
+const httpService = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 

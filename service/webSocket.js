@@ -1,6 +1,6 @@
 const { WebSocketServer } = require('ws');
 const uuid = require('uuid');
-const { getQuizResults, updateQuizResults } = require('./database');  // Add imports for database functions
+const { getLikeResults, updateLikeResults } = require('./database');  // Add imports for database functions
 
 function quizLikes(httpServer) {
   const wss = new WebSocketServer({ noServer: true });
@@ -19,7 +19,7 @@ function quizLikes(httpServer) {
     connections.push(connection);
 
     // Fetch the initial state from the database
-    const quizzes = await getQuizResults();  // Fetch the quiz results from the database
+    const quizzes = await getLikeResults();  // Fetch the quiz results from the database
 
     // Send the current state to the newly connected client
     ws.send(JSON.stringify({ type: 'initialState', quizzes }));
@@ -31,7 +31,7 @@ function quizLikes(httpServer) {
 
         if (message.type === 'update') {
           const { quizId, action } = message;
-          const quizzes = await getQuizResults();  // Get the latest state from the database
+          const quizzes = await getLikeResults();  // Get the latest state from the database
 
           if (quizzes[quizId]) {
             if (action === 'like') {
@@ -41,7 +41,7 @@ function quizLikes(httpServer) {
             }
 
             // Update the state in the database
-            await updateQuizResults(quizId, quizzes[quizId]);
+            await updateLikeResults(quizId, quizzes[quizId]);
 
             // Broadcast the updated state to all clients
             const updateMessage = JSON.stringify({
