@@ -4,6 +4,7 @@ const path = require('path');
 const bcrypt = require('bcrypt'); // Required for password validation
 const jwt = require('jsonwebtoken'); // Required for token generation
 const { getUser, getUserByToken, createUser, addResult, getResults, updateUserToken } = require('./database.js');
+const { quizLikes } = require('./webSocket.js')
 
 const app = express();
 
@@ -180,5 +181,7 @@ app.use((err, req, res, next) => {
 
 // Run the server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Listening on port ${port}`);
 });
+
+quizLikes(httpService);
