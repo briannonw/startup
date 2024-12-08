@@ -8,6 +8,7 @@ const client = new MongoClient(url, { tls: true, serverSelectionTimeoutMS: 3000,
 const db = client.db('startup');
 const userCollection = db.collection('user');
 const resultCollection = db.collection('result');
+const likeCollection = db.collection('likeResults');
 
 // This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
@@ -73,6 +74,27 @@ async function updateUserToken(userId, newToken) {
   }
 }
 
+// Fetch quiz results (likes/dislikes)
+async function getLikeResults() {
+  const quizzes = await likeCollection.find({}).toArray();
+  const quizState = {};
+
+  quizzes.forEach((quiz) => {
+    quizState[quiz.quizId] = { likes: quiz.likes, dislikes: quiz.dislikes };
+  });
+
+  return quizState;
+}
+
+// Update quiz results (likes/dislikes)
+async function updateLikeResults(quizId, quizData) {
+  await likeCollection.updateOne(
+    { quizId: quizId },
+    { $set: { likes: quizData.likes, dislikes: quizData.dislikes } },
+    { upsert: true }  // If quiz doesn't exist, insert it
+  );
+}
+
 module.exports = {
   getUser,
   getUserByToken,
@@ -80,4 +102,6 @@ module.exports = {
   addResult,
   getResults,
   updateUserToken,
+  getLikeResults,
+  updateLikeResults,
 };

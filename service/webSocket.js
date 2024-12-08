@@ -1,14 +1,9 @@
 const { WebSocketServer } = require('ws');
 const uuid = require('uuid');
+const { getQuizResults, updateQuizResults } = require('./database');  // Add imports for database functions
 
 function quizLikes(httpServer) {
   const wss = new WebSocketServer({ noServer: true });
-
-  // Central state for likes and dislikes
-  const quizzes = {
-    quiz1: { likes: 0, dislikes: 0 },
-    quiz2: { likes: 0, dislikes: 0 },
-  };
 
   let connections = [];
 
@@ -19,26 +14,34 @@ function quizLikes(httpServer) {
     });
   });
 
-  wss.on('connection', (ws) => {
+  wss.on('connection', async (ws) => {
     const connection = { id: uuid.v4(), alive: true, ws: ws };
     connections.push(connection);
+
+    // Fetch the initial state from the database
+    const quizzes = await getQuizResults();  // Fetch the quiz results from the database
 
     // Send the current state to the newly connected client
     ws.send(JSON.stringify({ type: 'initialState', quizzes }));
 
     // Handle incoming messages
-    ws.on('message', (data) => {
+    ws.on('message', async (data) => {
       try {
         const message = JSON.parse(data);
 
         if (message.type === 'update') {
           const { quizId, action } = message;
+          const quizzes = await getQuizResults();  // Get the latest state from the database
+
           if (quizzes[quizId]) {
             if (action === 'like') {
               quizzes[quizId].likes += 1;
             } else if (action === 'dislike') {
               quizzes[quizId].dislikes += 1;
             }
+
+            // Update the state in the database
+            await updateQuizResults(quizId, quizzes[quizId]);
 
             // Broadcast the updated state to all clients
             const updateMessage = JSON.stringify({
