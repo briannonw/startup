@@ -76,23 +76,54 @@ async function updateUserToken(userId, newToken) {
 
 // Fetch quiz results (likes/dislikes)
 async function getLikeResults() {
-  const quizzes = await likeCollection.find({}).toArray();
+  const quizzes = await likeCollection.find({}).toArray(); // Fetch all quiz feedback from likeCollection
   const quizState = {};
 
   quizzes.forEach((quiz) => {
     quizState[quiz.quizId] = { likes: quiz.likes, dislikes: quiz.dislikes };
   });
 
-  return quizState;
+  return quizState; // Return the likes/dislikes for each quiz
 }
 
 // Update quiz results (likes/dislikes)
-async function updateLikeResults(quizId, quizData) {
-  await likeCollection.updateOne(
-    { quizId: quizId },
-    { $set: { likes: quizData.likes, dislikes: quizData.dislikes } },
-    { upsert: true }  // If quiz doesn't exist, insert it
-  );
+async function updateLikeResults(quizId, action) {
+  try {
+    // Find the quiz feedback in the likeCollection
+    const existingQuiz = await likeCollection.findOne({ quizId: quizId });
+
+    if (!existingQuiz) {
+      // If the quiz doesn't exist in the collection, create a new entry with default values
+      const newQuiz = {
+        quizId: quizId,
+        likes: action === 'like' ? 1 : 0, // Increment like if action is like, otherwise set to 0
+        dislikes: action === 'dislike' ? 1 : 0, // Increment dislike if action is dislike, otherwise set to 0
+      };
+      await likeCollection.insertOne(newQuiz); // Insert new quiz feedback
+      return newQuiz;
+    } else {
+      // If the quiz already exists, update the like or dislike count
+      const updateData = {};
+      if (action === 'like') {
+        updateData.likes = existingQuiz.likes + 1;
+      } else if (action === 'dislike') {
+        updateData.dislikes = existingQuiz.dislikes + 1;
+      }
+
+      // Update the existing quiz feedback
+      await likeCollection.updateOne(
+        { quizId: quizId },
+        { $set: updateData }
+      );
+
+      // Return the updated quiz feedback
+      const updatedQuiz = await likeCollection.findOne({ quizId: quizId });
+      return updatedQuiz;
+    }
+  } catch (error) {
+    console.error('Database error:', error);
+    throw error;
+  }
 }
 
 module.exports = {

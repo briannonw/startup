@@ -141,6 +141,35 @@ apiRouter.get('/results', async (req, res) => {
   }
 });
 
+// Fetch current feedback data
+app.get('/api/feedback', async (req, res) => {
+  try {
+    const quizzes = await getLikeResults();
+    res.status(200).json(quizzes);
+  } catch (error) {
+    console.error('Error fetching feedback:', error);
+    res.status(500).json({ error: 'Failed to fetch feedback data.' });
+  }
+});
+
+// Update feedback data
+app.post('/api/feedback', async (req, res) => {
+  const { quizId, action } = req.body;
+
+  if (!quizId || !action) {
+    return res.status(400).json({ error: 'Invalid request data.' });
+  }
+
+  try {
+    // Update the database
+    const updatedQuiz = await updateLikeResults(quizId, action);
+    res.status(200).json(updatedQuiz);
+  } catch (error) {
+    console.error('Error updating feedback:', error);
+    res.status(500).json({ error: 'Failed to update feedback data.' });
+  }
+});
+
 // Route for logout
 apiRouter.delete('/auth/logout', async (req, res) => {
   const token = req.headers.authorization?.split(' ')[1]; // Extract the token
