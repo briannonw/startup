@@ -57,7 +57,7 @@ I associated quiz results with the logged in user. Quiz results and user credent
 - [x]  Existing user authentication and logout
 - [x]  Use MongoDB to store user credentials and application data
 - [x]  Restricts functionality based on authentication
-#### Websocket
+#### WebSocket
 I used WebSocket to update the number of likes and dislikes for each quiz in realtime.
 - [x]  Backend listens for WebSocket connection
 - [x]  Frontend makes Websocket connection
