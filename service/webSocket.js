@@ -21,7 +21,7 @@ function quizLikes(httpServer) {
 
     try {
       // Fetch the initial state from your API
-      const response = await axios.get('http://localhost:4000/api/feedback');
+      const response = await axios.get('http://startup.cs260project.click/api/feedback');
       const quizzes = response.data;
 
       // Send the current state to the newly connected client
@@ -42,7 +42,7 @@ function quizLikes(httpServer) {
     
           // Update the feedback in the database
           const updatePayload = { quizId, action: feedbackType };
-          const apiResponse = await axios.post('http://localhost:4000/api/feedback', updatePayload);
+          const apiResponse = await axios.post('http://startup.cs260project.click/api/feedback', updatePayload);
     
           const updatedQuiz = apiResponse.data;
     

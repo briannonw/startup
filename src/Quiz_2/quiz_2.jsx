@@ -190,7 +190,7 @@ export function Quiz_2({}) {
   
     fetchFeedback();
   
-    const socket = new WebSocket('ws://localhost:4000'); // Adjust port if necessary
+    const socket = new WebSocket('wss://startup.cs260project.click'); // Adjust port if necessary
     setWs(socket);
   
     socket.onmessage = (event) => {
