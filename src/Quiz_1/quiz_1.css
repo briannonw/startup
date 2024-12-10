@@ -87,3 +87,8 @@
 .option.selected {
     font-weight: bold;
 }
+
+.like-count {
+    text-align: right;
+    margin-right: 23px;
+}

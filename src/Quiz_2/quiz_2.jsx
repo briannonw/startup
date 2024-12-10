@@ -21,56 +21,56 @@ export function Quiz_2({}) {
         { value: "Betty Rubble", label: "Betty Rubble", vehicle: "Sports Car", img: "https://e7.pngegg.com/pngimages/255/761/png-clipart-flintstones-character-betty-rubble-at-the-movies-cartoons.png" },
       ],
     },
-    // {
-    //   id: "q2",
-    //   text: "Which Generation Do You Belong To?",
-    //   options: [
-    //     { value: "Baby Boomer", label: "Baby Boomer", vehicle: "Sports Car", img: "https://c8.alamy.com/comp/EMY14P/background-text-pattern-concept-wordcloud-illustration-of-baby-boomers-EMY14P.jpg" },
-    //     { value: "Gen Z", label: "Gen Z", vehicle: "Mini Van", img: "https://www.shutterstock.com/image-illustration/generation-z-word-cloud-concept-260nw-424332475.jpg" },
-    //     { value: "Millennial", label: "Millennial", vehicle: "Sedan", img: "https://www.shutterstock.com/image-illustration/generation-y-word-cloud-concept-260nw-423839059.jpg" },
-    //     { value: "Gen X", label: "Gen X", vehicle: "SUV", img: "https://c8.alamy.com/comp/EMY14Y/background-text-pattern-concept-wordcloud-illustration-of-generation-EMY14Y.jpg" },
-    //   ],
-    // },
-    // {
-    //   id: "q3",
-    //   text: "How Many Traffic Violations Do You Receive per Year?",
-    //   options: [
-    //     { value: "One", label: "One", vehicle: "Sedan", img: "https://media.istockphoto.com/id/1416797815/photo/golden-number-one.jpg?s=612x612&w=0&k=20&c=A1AOP7RZK8Rkk2yxEumTlWmhQE-0nGfxVz3Ef39Dzxc=" },
-    //     { value: "Two", label: "Two", vehicle: "SUV", img: "https://i.ytimg.com/vi/sz-7LTCYgIs/hqdefault.jpg" },
-    //     { value: "Three", label: "Three", vehicle: "Mini Van", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrm4vq08Bcz7UDsNLDaN_46Vx55dbDhmXCUw&s" },
-    //     { value: "Four", label: "Four", vehicle: "Sports Car", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Eo_circle_pink_number-4.svg/1200px-Eo_circle_pink_number-4.svg.png" },
-    //   ],
-    // },
-    // {
-    //   id: "q4",
-    //   text: "What Describes You Best?",
-    //   options: [
-    //     { value: "Cool as a Cucumber", label: "Cool as a Cucumber", vehicle: "Sports Car", img: "https://ih1.redbubble.net/image.3359016754.6688/st,small,507x507-pad,600x600,f8f8f8.jpg" },
-    //     { value: "Hot Mess", label: "Hot Mess", vehicle: "Mini Van", img: "https://images.getbento.com/accounts/90f9564d8620cfbdb3e7caadfdc5f726/media/images/Hotmess-newlogo-transparent.png?w=1000&fit=max&auto=compress,format&h=1000" },
-    //     { value: "Zen as a Yogi", label: "Zen as a Yogi", vehicle: "SUV", img: "https://i.scdn.co/image/ab67616d00001e027d0f7793aeb21ca1701e181d" },
-    //     { value: "Work Work Work", label: "Work Work Work", vehicle: "Sedan", img: "https://ih1.redbubble.net/image.200328489.3476/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.u2.jpg" },
-    //   ],
-    // },
-    // {
-    //   id: "q5",
-    //   text: "What Color Would Your Vehicle Be?",
-    //   options: [
-    //     { value: "Blue", label: "Blue", vehicle: "Sedan", img: "https://www.solidbackgrounds.com/images/7680x4320/7680x4320-medium-electric-blue-solid-color-background.jpg" },
-    //     { value: "White", label: "White", vehicle: "Mini Van", img: "https://www.ledr.com/colours/white.jpg" },
-    //     { value: "Red", label: "Red", vehicle: "Sports Car", img: "https://img.freepik.com/premium-photo/red-color-backgrounds_984027-210458.jpg" },
-    //     { value: "Silver", label: "Silver", vehicle: "SUV", img: "https://img.freepik.com/premium-vector/abstract-solid-silver-titanium-plate-material-with-grunge-line-pattern-decorative-background_121035-214.jpg" },
-    //   ],
-    // },
-    // {
-    //   id: "q6",
-    //   text: "Which Disney Character Do You Relate To?",
-    //   options: [
-    //     { value: "Eeyore", label: "Eeyore", vehicle: "Sedan", img: "https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/disney-winnie-the-pooh-eeyore-large-face-malaky-ghazi.jpg" },
-    //     { value: "Snow White", label: "Snow White", vehicle: "Mini Van", img: "https://thebikeeatingtree.wordpress.com/wp-content/uploads/2014/11/snow-white.jpg" },
-    //     { value: "Cruella de Vil", label: "Cruella de Vil", vehicle: "Sports Car", img: "https://static1.colliderimages.com/wordpress/wp-content/uploads/2021/02/cruella-de-vil-social.jpg" },
-    //     { value: "Gaston", label: "Gaston", vehicle: "SUV", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiXcTYBcO4p5P97WEavAkKzta7lW6gqDr4GiSGWEHbZJRvSM6GelY-3dIo26Nv1EdAwJ3UGMqm8El2AY3dIyuHvXl35QY4ztHWisIvALaLIRBSopOSz683AGLbbPaGg_fcpmV-FB40iT_I/s1600/beauty_and_the_beast_gaston.jpg" },
-    //   ],
-    // },
+    {
+      id: "q2",
+      text: "Which Generation Do You Belong To?",
+      options: [
+        { value: "Baby Boomer", label: "Baby Boomer", vehicle: "Sports Car", img: "https://c8.alamy.com/comp/EMY14P/background-text-pattern-concept-wordcloud-illustration-of-baby-boomers-EMY14P.jpg" },
+        { value: "Gen Z", label: "Gen Z", vehicle: "Mini Van", img: "https://www.shutterstock.com/image-illustration/generation-z-word-cloud-concept-260nw-424332475.jpg" },
+        { value: "Millennial", label: "Millennial", vehicle: "Sedan", img: "https://www.shutterstock.com/image-illustration/generation-y-word-cloud-concept-260nw-423839059.jpg" },
+        { value: "Gen X", label: "Gen X", vehicle: "SUV", img: "https://c8.alamy.com/comp/EMY14Y/background-text-pattern-concept-wordcloud-illustration-of-generation-EMY14Y.jpg" },
+      ],
+    },
+    {
+      id: "q3",
+      text: "How Many Traffic Violations Do You Receive per Year?",
+      options: [
+        { value: "One", label: "One", vehicle: "Sedan", img: "https://media.istockphoto.com/id/1416797815/photo/golden-number-one.jpg?s=612x612&w=0&k=20&c=A1AOP7RZK8Rkk2yxEumTlWmhQE-0nGfxVz3Ef39Dzxc=" },
+        { value: "Two", label: "Two", vehicle: "SUV", img: "https://i.ytimg.com/vi/sz-7LTCYgIs/hqdefault.jpg" },
+        { value: "Three", label: "Three", vehicle: "Mini Van", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrm4vq08Bcz7UDsNLDaN_46Vx55dbDhmXCUw&s" },
+        { value: "Four", label: "Four", vehicle: "Sports Car", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Eo_circle_pink_number-4.svg/1200px-Eo_circle_pink_number-4.svg.png" },
+      ],
+    },
+    {
+      id: "q4",
+      text: "What Describes You Best?",
+      options: [
+        { value: "Cool as a Cucumber", label: "Cool as a Cucumber", vehicle: "Sports Car", img: "https://ih1.redbubble.net/image.3359016754.6688/st,small,507x507-pad,600x600,f8f8f8.jpg" },
+        { value: "Hot Mess", label: "Hot Mess", vehicle: "Mini Van", img: "https://images.getbento.com/accounts/90f9564d8620cfbdb3e7caadfdc5f726/media/images/Hotmess-newlogo-transparent.png?w=1000&fit=max&auto=compress,format&h=1000" },
+        { value: "Zen as a Yogi", label: "Zen as a Yogi", vehicle: "SUV", img: "https://i.scdn.co/image/ab67616d00001e027d0f7793aeb21ca1701e181d" },
+        { value: "Work Work Work", label: "Work Work Work", vehicle: "Sedan", img: "https://ih1.redbubble.net/image.200328489.3476/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.u2.jpg" },
+      ],
+    },
+    {
+      id: "q5",
+      text: "What Color Would Your Vehicle Be?",
+      options: [
+        { value: "Blue", label: "Blue", vehicle: "Sedan", img: "https://www.solidbackgrounds.com/images/7680x4320/7680x4320-medium-electric-blue-solid-color-background.jpg" },
+        { value: "White", label: "White", vehicle: "Mini Van", img: "https://www.ledr.com/colours/white.jpg" },
+        { value: "Red", label: "Red", vehicle: "Sports Car", img: "https://img.freepik.com/premium-photo/red-color-backgrounds_984027-210458.jpg" },
+        { value: "Silver", label: "Silver", vehicle: "SUV", img: "https://img.freepik.com/premium-vector/abstract-solid-silver-titanium-plate-material-with-grunge-line-pattern-decorative-background_121035-214.jpg" },
+      ],
+    },
+    {
+      id: "q6",
+      text: "Which Disney Character Do You Relate To?",
+      options: [
+        { value: "Eeyore", label: "Eeyore", vehicle: "Sedan", img: "https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/disney-winnie-the-pooh-eeyore-large-face-malaky-ghazi.jpg" },
+        { value: "Snow White", label: "Snow White", vehicle: "Mini Van", img: "https://thebikeeatingtree.wordpress.com/wp-content/uploads/2014/11/snow-white.jpg" },
+        { value: "Cruella de Vil", label: "Cruella de Vil", vehicle: "Sports Car", img: "https://static1.colliderimages.com/wordpress/wp-content/uploads/2021/02/cruella-de-vil-social.jpg" },
+        { value: "Gaston", label: "Gaston", vehicle: "SUV", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiXcTYBcO4p5P97WEavAkKzta7lW6gqDr4GiSGWEHbZJRvSM6GelY-3dIo26Nv1EdAwJ3UGMqm8El2AY3dIyuHvXl35QY4ztHWisIvALaLIRBSopOSz683AGLbbPaGg_fcpmV-FB40iT_I/s1600/beauty_and_the_beast_gaston.jpg" },
+      ],
+    },
   ];
 
   const handleOptionClick = (questionId, optionValue) => {
@@ -268,8 +268,8 @@ export function Quiz_2({}) {
           <h4 className="result">Your Luxury Ride Is A:</h4>
           <h3 className="result">{`${result}`}</h3>
           <h4 className="feedback">Feedback:</h4>
-          <p>Like count: {feedback.likes}</p>
-          <p>Dislike count: {feedback.dislikes}</p>
+          <p className="like-count">Quiz Likes: {feedback.likes}</p>
+          <p className="like-count">Quiz Dislikes: {feedback.dislikes}</p>
           <div className="button-feedback">
             <button
               className="like-button"

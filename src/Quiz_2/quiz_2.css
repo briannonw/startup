@@ -77,3 +77,8 @@
 .like-button {
     margin-right: 20px;
 }
+
+.like-count {
+    text-align: right;
+    margin-right: 23px;
+}
