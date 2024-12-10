@@ -214,7 +214,7 @@ export function Quiz_1({}) {
   
     fetchFeedback();
 
-    const socket = new WebSocket('wss://startup.cs260project.click'); // Adjust for production URL
+    const socket = new WebSocket('ws://startup.cs260project.click'); // Adjust for production URL
     setWs(socket);
   
     socket.onmessage = (event) => {
