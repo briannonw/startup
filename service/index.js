@@ -199,7 +199,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
 
 // Catch-all route to serve the index.html file for unmatched routes (e.g., SPA routing)
 app.use((req, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, '..') });
+  res.sendFile('index.html', { root: path.join(__dirname, 'public') });
 });
 
 // Global error handling middleware
