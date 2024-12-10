@@ -5,7 +5,7 @@ export function Quiz_2({}) {
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
   const [carImage, setCarImage] = useState('');
-  const [feedback, setFeedback] = useState({ quiz_2: { like: 0, dislike: 0 } });
+  const [feedback, setFeedback] = useState({ likes: 0, dislikes: 0 });
   const [ws, setWs] = useState(null);
 
   const apiKey = import.meta.env.VITE_PIXABAY_API_KEY;
@@ -169,6 +169,26 @@ export function Quiz_2({}) {
     };
   
     fetchCarImage();
+
+    // 1. Fetch initial quiz data (likes/dislikes) from the database
+    const fetchFeedback = async () => {
+      try {
+        const response = await fetch('/api/feedback');  // Corrected endpoint for feedback
+        const data = await response.json();
+        console.log(data); // Add this to inspect the data structure
+        if (data && data.quiz_2) {
+          // Directly access the likes and dislikes from the quiz_1 object
+          setFeedback({
+            likes: data.quiz_2.likes || 0,
+            dislikes: data.quiz_2.dislikes || 0,
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching quiz data:', error);
+      }
+    };
+  
+    fetchFeedback();
   
     const socket = new WebSocket('ws://localhost:4000'); // Adjust port if necessary
     setWs(socket);
@@ -181,20 +201,16 @@ export function Quiz_2({}) {
         // Update the feedback state with the new like/dislike counts
         setFeedback((prev) => ({
           ...prev,
-          quiz_2: {
-            like: data.likes || prev.quiz_2?.like || 0,
-            dislike: data.dislikes || prev.quiz_2?.dislike || 0,
-          },
+          likes: data.likes ?? prev.likes,
+          dislikes: data.dislikes ?? prev.dislikes,
         }));
       }
   
       if (data.type === 'initialState' || data.type === 'feedbackUpdate') {
         setFeedback((prev) => ({
           ...prev,
-          quiz_2: {
-            like: data.feedback?.quiz_2?.like || prev.quiz_2?.like || 0,
-            dislike: data.feedback?.quiz_2?.dislike || prev.quiz_2?.dislike || 0,
-          },
+          likes: data.likes ?? prev.likes,
+          dislikes: data.dislikes ?? prev.dislikes,
         }));
       }
     };
@@ -252,8 +268,8 @@ export function Quiz_2({}) {
           <h4 className="result">Your Luxury Ride Is A:</h4>
           <h3 className="result">{`${result}`}</h3>
           <h4 className="feedback">Feedback:</h4>
-          <p>Like count: {feedback['quiz_2']?.like || 0}</p>
-          <p>Dislike count: {feedback['quiz_2']?.dislike || 0}</p>
+          <p>Like count: {feedback.likes}</p>
+          <p>Dislike count: {feedback.dislikes}</p>
           <div className="button-feedback">
             <button
               className="like-button"

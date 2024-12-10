@@ -5,10 +5,8 @@ export function Quiz_1({}) {
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
   const [natureImage, setNatureImage] = useState('');
-  const [quizData, setQuizData] = useState({ likes: 0, dislikes: 0 }); // New state for like/dislike counts
-  const [feedback, setFeedback] = useState(null); // New state for like/dislike feedback
-
-  const [ws, setWs] = useState(null); // WebSocket connection
+  const [feedback, setFeedback] = useState({ likes: 0, dislikes: 0 });
+  const [ws, setWs] = useState(null);
 
   const apiKey = import.meta.env.VITE_PIXABAY_API_KEY;
 
@@ -178,122 +176,10 @@ export function Quiz_1({}) {
       });
     }
   };
-
-  const handleLike = () => {
-    setFeedback('like');
-    sendFeedbackToServer('like');
-  };
-  
-  const handleDislike = () => {
-    setFeedback('dislike');
-    sendFeedbackToServer('dislike');
-  };
-  
-  const sendFeedbackToServer = (type) => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      alert('Please log in to submit your feedback');
-      return;
-    }
-  
-    fetch('/api/feedback', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        quizId: 'quiz_1', // Replace 'quiz_1' with the dynamic quiz identifier if needed
-        action: type,     // 'like' or 'dislike'
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Server responded with status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Feedback saved:', data);
-        alert(`Your ${type} feedback has been submitted!`);
-        
-        // After submitting feedback, send WebSocket message to update like/dislike count
-        const ws = new WebSocket('ws://localhost:4000/ws');
-        ws.onopen = () => {
-          console.log('WebSocket connection opened');
-  
-          const message = { type: 'update', quizId: 'quiz_1', action: type };
-          console.log('Sending message:', message);
-          ws.send(
-            JSON.stringify({
-              type: 'update-like-dislike', // Custom message type for feedback
-              action: type,                // 'like' or 'dislike'
-              token,                       // Token for identifying the user
-            })
-          );
-        };
-      })
-      .catch((error) => {
-        console.error('Error saving feedback:', error);
-        alert('There was an issue saving your feedback. Please try again.');
-      });
-  };
   
   const allQuestionsAnswered = questions.every((q) => answers[q.id]);
   
   useEffect(() => {
-    // 1. Fetch initial quiz data (likes/dislikes) from the database
-    const fetchQuizData = async () => {
-      try {
-        const response = await fetch('/api/feedback');  // Corrected endpoint for feedback
-        const data = await response.json();
-        console.log(data); // Add this to inspect the data structure
-        if (data && data.quiz_1) {
-          // Directly access the likes and dislikes from the quiz_1 object
-          setQuizData({
-            likes: data.quiz_1.likes,
-            dislikes: data.quiz_1.dislikes,
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching quiz data:', error);
-      }
-    };
-  
-    // 2. WebSocket for real-time updates
-    const ws = new WebSocket('ws://localhost:4000/ws');
-  
-    ws.onopen = () => {
-      console.log('WebSocket connected');
-    };
-  
-    ws.onmessage = (event) => {
-      console.log('Received WebSocket message:', event.data);
-      const data = JSON.parse(event.data);
-      
-      console.log('Parsed WebSocket data:', data);
-    
-      if (data.type === 'like-dislike-update' && data.quizId === 'quiz_1') {
-        // Ensure the state update triggers a re-render
-        setQuizData((prevData) => {
-          // Check if the incoming data actually has new values to update
-          if (data.likes !== prevData.likes || data.dislikes !== prevData.dislikes) {
-            return {
-              likes: data.likes,
-              dislikes: data.dislikes,
-            };
-          }
-          return prevData; // No update if the data is the same
-        });
-        console.log('Updated quiz data:', data);
-      }
-    };
-    
-  
-    ws.onerror = (error) => {
-      console.error('WebSocket error:', error);
-    };
-  
     // Fetch random nature image
     const fetchNatureImage = async () => {
       try {
@@ -305,16 +191,66 @@ export function Quiz_1({}) {
         console.error('Error fetching nature image:', error);
       }
     };
-  
-    fetchQuizData();
+
     fetchNatureImage();
-  
-    // Cleanup WebSocket connection on component unmount
-    return () => {
-      ws.close();
+
+    // 1. Fetch initial quiz data (likes/dislikes) from the database
+    const fetchFeedback = async () => {
+      try {
+        const response = await fetch('/api/feedback');  // Corrected endpoint for feedback
+        const data = await response.json();
+        console.log(data); // Add this to inspect the data structure
+        if (data && data.quiz_1) {
+          // Directly access the likes and dislikes from the quiz_1 object
+          setFeedback({
+            likes: data.quiz_1.likes || 0,
+            dislikes: data.quiz_1.dislikes || 0,
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching quiz data:', error);
+      }
     };
+  
+    fetchFeedback();
+
+    const socket = new WebSocket('ws://localhost:4000'); // Adjust port if necessary
+    setWs(socket);
+  
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+  
+      if (data.type === 'like-dislike-update') {
+        console.log('Update received:', data);
+        // Update the feedback state with the new like/dislike counts
+        setFeedback((prev) => ({
+          ...prev,
+          likes: data.likes ?? prev.likes,
+          dislikes: data.dislikes ?? prev.dislikes,
+        }));
+      }
+  
+      if (data.type === 'initialState' || data.type === 'feedbackUpdate') {
+        setFeedback((prev) => ({
+          ...prev,
+          likes: data.likes ?? prev.likes,
+          dislikes: data.dislikes ?? prev.dislikes,
+        }));
+      }
+    };
+  
+    return () => {
+      socket.close();
+    };
+
   }, []);  // Empty dependency array ensures this runs only once on mount
   
+  const handleFeedback = (quizId, feedbackType) => {
+    if (ws) {
+      ws.send(JSON.stringify({ type: 'updateFeedback', quizId, feedbackType }));
+    }
+  };
+
   return (
     <main className="main-text">
       <h1>What Season Are You?</h1>
@@ -355,13 +291,18 @@ export function Quiz_1({}) {
           <h4 className="result">Your Season Is:</h4>
           <h3 className="result">{result}</h3>
           <h4 className="feedback">Feedback:</h4>
-          <p>Quiz likes: {quizData.likes}</p>
-          <p>Quiz dislikes: {quizData.dislikes}</p>
+          <p>Quiz likes: {feedback.likes}</p>
+          <p>Quiz dislikes: {feedback.dislikes}</p>
           <div className="button-feedback">
-            <button className="like-button" onClick={handleLike}>
+            <button
+              className="like-button"
+              onClick={() => handleFeedback('quiz_1', 'like')}
+            >
               Like
             </button>
-            <button className="dislike-button" onClick={handleDislike}>
+            <button
+              onClick={() => handleFeedback('quiz_1', 'dislike')}
+            >
               Dislike
             </button>
           </div>
