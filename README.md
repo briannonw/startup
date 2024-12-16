@@ -76,3 +76,5 @@ I used WebSocket to update the number of likes and dislikes for each quiz in rea
 * [Class Notes](Class_Notes.md)
 #### Midterm
 * [Midterm Notes](Midterm_Notes.md)
+#### Final
+* [Final Notes](Final_Notes.md)
