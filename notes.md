@@ -11,3 +11,5 @@
 * Documents/cs260/startup
 ## Midterm
 * [Midterm Notes](Midterm_Notes.md)
+## Final
+* [Final Notes](Final_Notes.md)
