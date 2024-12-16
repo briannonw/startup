@@ -87,4 +87,4 @@
 * Port 22: SSH
 34. What will the following code using Promises output when executed?
 * The output depends on the resolution of the promise (fulfilled or rejected). Typically, it will return values or handle errors based on the promise's state.
-#### Return to [notes.md](notes.md)
+#### Return to [notes.md](notes.md) or [README.md](README.md)
